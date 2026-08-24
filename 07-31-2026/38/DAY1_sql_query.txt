@@ -1,0 +1,204 @@
+ASSIGNMENT 1)
+
+SELECT * FROM catalog WHERE ROWNUM <= 5;
+
+-----
+
+ASSIGNMENT 2)
+
+DESC catalog;
+
+-----
+
+ASSIGNMENT 3)
+
+CREATE TABLE Student
+(
+Roll NUMBER(5),
+Name VARCHAR(30),
+Age NUMBER(5),
+Course VARCHAR2(5),
+Math NUMBER(6,2),
+Physics NUMBER(6,2),
+Computer NUMBER(6,2),
+Birthday DATE
+);
+
+-----
+
+ASSIGNMENT 4)
+
+CREATE TABLE MSc AS
+SELECT *
+FROM Student
+WHERE 1 = 2;
+
+-----
+
+ASSIGNMENT 5)
+
+SELECT * FROM MSc;
+
+-----
+
+ASSIGNMENT 6)
+
+CREATE TABLE MCA AS
+SELECT
+    Roll,
+    Name AS First_Name,
+    Age,
+    Course AS Department,
+    Math,
+    Physics,
+    Computer,
+    Birthday
+FROM student
+WHERE 1=2;
+
+-----
+
+ASSIGNMENT 7)
+
+DESC MCA;
+
+-----
+
+ASSIGNMENT 8)
+
+INSERT INTO Student
+VALUES
+(1,'Rahul',19,'BCA',79.5,67,89,DATE '1993-06-15');
+
+INSERT INTO Student
+VALUES
+(2,'Kunal',21,'BCA',68,76,59.5,DATE '1991-08-16');
+
+INSERT INTO Student
+VALUES
+(3,'Aditi',20,'MSc',90,73,56,DATE '1992-09-20');
+
+INSERT INTO Student
+VALUES
+(4,'Sumit',20,'MCA',57.5,78,81,DATE '1991-12-07');
+
+INSERT INTO Student
+VALUES
+(5,'Anirban',22,'MCA',80,68,63,DATE '1994-09-15');
+
+INSERT INTO Student
+VALUES
+(6,'Kumkum',21,'BCA',72,54.5,60,DATE '1995-02-08');
+
+INSERT INTO Student
+VALUES
+(7,'Suman',21,'BCA',91.5,32,61,DATE '1994-03-10');
+
+INSERT INTO Student
+VALUES
+(8,'Rohit',22,'MSc',85,76,92,DATE '1992-04-19');
+COMMIT;
+
+-----
+
+ASSIGNMENT 9)
+
+SELECT * FROM Student;
+
+-----
+
+ASSIGNMENT 10)
+
+SELECT * FROM Student WHERE Roll = 5;
+
+-----
+
+ASSIGNMENT 11)
+
+SELECT Roll,Name,Math,Physics,Computer FROM Student;
+
+-----
+
+ASSIGNMENT 12)
+
+SELECT * FROM Student WHERE Course = 'BCA';
+
+-----
+
+ASSIGNMENT 13)
+
+INSERT INTO MCA
+SELECT
+    Roll,
+    Name AS First_name,
+    Age,
+    Course AS Department,
+    Math,
+    Physics,
+    Computer,
+    Birthday
+FROM Student
+WHERE Course = 'MCA';
+
+COMMIT;
+
+-----
+
+ASSIGNMENT 14)
+
+INSERT INTO MSc
+SELECT * FROM Student
+WHERE Course = 'MSc';
+
+COMMIT;
+
+-----
+
+ASSIGNMENT 15)
+
+DESC Student;
+
+DESC MCA;
+
+-----
+
+ASSIGNMENT 16)
+
+SELECT Course, Roll, Name, Age, Math, Physics, Computer, Birthday 
+FROM Student;
+
+-----
+
+ASSIGNMENT 17)
+
+UPDATE Student
+SET Math = 95
+WHERE Roll = 7;
+
+COMMIT;
+
+-----
+
+ASSIGNMENT 18)
+
+UPDATE MCA
+SET First_Name = 'Sumitava'
+WHERE Roll = 4;
+
+COMMIT;
+
+-----
+
+ASSIGNMENT 19)
+
+DELETE FROM Student WHERE Roll = 2;
+COMMIT;
+
+-----
+
+ASSIGNMENT 20)
+
+DELETE FROM Student;
+COMMIT;
+
+
