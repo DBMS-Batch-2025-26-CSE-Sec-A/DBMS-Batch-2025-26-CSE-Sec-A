@@ -1,0 +1,149 @@
+name: Validate and Auto-Merge Student PRs
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  validate-and-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Get Modified Files
+        id: files
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          FILES=$(gh pr view "$PR_NUMBER" --json files --jq '.files[].path')
+          
+          echo "CHANGED_FILES<<EOF" >> $GITHUB_ENV
+          echo "$FILES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate Author Folder
+        run: |
+          AUTHOR="${{ github.event.pull_request.user.login }}"
+          echo "PR Author: $AUTHOR"
+
+          # 1. ADMIN BYPASS: Full access to root directory & all files
+          if [[ "$AUTHOR" == "AG349" || "$AUTHOR" == "BodhiCSE2025" ]]; then
+            echo "SUCCESS: Admin user '$AUTHOR' detected. Bypassing path check completely."
+            exit 0
+          fi
+
+          # 2. Map GitHub Usernames to assigned Roll Numbers
+          declare -A ROLL_MAP
+          ROLL_MAP=(
+            ["Disha0007-dev"]="01"
+            ["KomalChoudhury"]="02"
+            ["najib-aftab"]="03"
+            ["SUDIP-MANDAL01"]="04"
+            ["Shreyanka07"]="05"
+            ["akshitasaha1006"]="06"
+            ["Pritammandal18"]="07"
+            ["SKFARDIN86"]="08"
+            ["soumyadipdinda"]="09"
+            ["ANU06-coder"]="10"
+            ["Ankithalder311"]="12"
+            ["PiyaliSahoo"]="16"
+            ["tiyasa2"]="17"
+            ["BijoyRoyxxx"]="18"
+            ["ishikamahto8"]="19"
+            ["manikmaity721635-dot"]="21"
+            ["SauptikMukhopadhyay"]="22"
+            ["quantum-nil"]="23"
+            ["sunendu51"]="24"
+            ["sayanmona1"]="25"
+            ["Prithwis0404"]="26"
+            ["utsab2006"]="27" 
+            ["debjit48-coders"]="28"
+            ["Sounika2006"]="29"
+            ["sibam-01"]="30"
+            ["deyarpan4484-lang"]="31"
+            ["ArnikBose"]="32"
+            ["satarupa133"]="33"
+            ["Swagata123-eng"]="34"
+            ["arka202535"]="35"
+            ["debayanpandey"]="36"
+            ["suparba03"]="37"
+            ["jasmin-official7"]="38"
+            ["anjangorai"]="40"
+            ["atifmd962"]="41"
+            ["Shirmyman1"]="42"
+            ["arghyasikder999-coder"]="43"
+            ["reeshavchoudhary86-ux"]="44"
+            ["sriparnamalakar101"]="45"
+            ["tuhinangshusingha"]="46"
+            ["siddtanzeel-design"]="47"
+            ["bidishaa07"]="48"
+            ["rosavineprotiva"]="50"
+            ["sahelipore27"]="51"
+            ["Ankan-2025-Roy"]="52"
+            ["arijitdutta1608"]="53"
+            ["bedantachakraborty2000555-cmyk"]="54"
+            ["Ahitagni-lan"]="55"
+            ["rohankumarpratihar2006-boop"]="56"
+            ["smsayanmondal06-svg"]="57"
+            ["mohanmaji2004-a11y"]="58"
+            ["simranmandalwork"]="59"
+            ["dasarpan1596-cmd"]="60"
+            ["Rahildev27"]="61"
+            ["MyselfPiyas"]="62"
+            ["4darshh"]="63"
+            ["aritro2006"]="65"
+            ["Arquam06"]="67"
+            ["Bigneshkumar"]="68"
+            ["harshranjan210705-web"]="69"
+            ["auraoflife7"]="70"
+          )
+
+          ASSIGNED_ROLL="${ROLL_MAP[$AUTHOR]}"
+
+          if [ -z "$ASSIGNED_ROLL" ]; then
+            echo "ERROR: Username '$AUTHOR' is not registered in the system."
+            exit 1
+          fi
+
+          SINGLE_ROLL=$((10#$ASSIGNED_ROLL))
+          PADDED_ROLL=$(printf "%02d" "$SINGLE_ROLL")
+
+          echo "Files modified in this PR:"
+          echo "$CHANGED_FILES"
+
+          # 3. STRICT CHECK: Handles spaces in filenames safely
+          FAIL_FLAG=0
+          while IFS= read -r FILE; do
+            [ -z "$FILE" ] && continue
+            
+            # Rejects root modifications, must match DD-MM-YYYY/ROLL/ pattern
+            if [[ "$FILE" =~ ^[0-9]{2}-[0-9]{2}-[0-9]{4}/"$PADDED_ROLL"/ ]] || [[ "$FILE" =~ ^[0-9]{2}-[0-9]{2}-[0-9]{4}/"$SINGLE_ROLL"/ ]]; then
+              echo "✅ ALLOWED: $FILE"
+            else
+              echo "❌ ACCESS DENIED: '$AUTHOR' attempted to modify '$FILE'"
+              FAIL_FLAG=1
+            fi
+          done <<< "$CHANGED_FILES"
+
+          if [ $FAIL_FLAG -eq 1 ]; then
+            echo "--------------------------------------------------------"
+            echo "Students can ONLY modify files inside: '<DATE_FOLDER>/$PADDED_ROLL/' or '<DATE_FOLDER>/$SINGLE_ROLL/'"
+            echo "Editing root files or outer directories directly is strictly reserved for Admins."
+            echo "--------------------------------------------------------"
+            exit 1
+          fi
+
+          echo "SUCCESS: All modified files belong strictly to date subfolder for roll '$ASSIGNED_ROLL'."
+
+      - name: Auto-Merge Validated PR
+        if: success() 
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} --auto --squash --delete-branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
