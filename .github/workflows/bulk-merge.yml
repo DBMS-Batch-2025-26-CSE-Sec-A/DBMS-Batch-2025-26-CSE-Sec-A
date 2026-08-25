@@ -33,7 +33,7 @@ jobs:
           echo "PR Author: $AUTHOR"
 
           # 1. ADMIN BYPASS: Full access to root directory & all files
-          if [[ "$AUTHOR" == "AG349" || "$AUTHOR" == "BodhiCSE2025" ]]; then
+          if [[ "$AUTHOR" == "AG349" ]]; then
             echo "SUCCESS: Admin user '$AUTHOR' detected. Bypassing path check completely."
             exit 0
           fi
