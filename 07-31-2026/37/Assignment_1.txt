@@ -1,0 +1,267 @@
+1. Display the data in existing default employees or emp or employee table.
+
+Query:
+Query:
+SELECT * FROM catalog WHERE ROW NUM<=5;
+
+
+2. Display the structure of the above table.
+
+Query:
+DESC catalog;
+
+
+3. Create a table “Student” with following structure:
+
+Roll	Name	Age	Course	Math	Physics	Computer
+	Birthday
+
+
+Details of Attributes:-
+Roll		Number (5)		
+Name		Varchar2 (30)		
+Age		Number (5)
+Course		Varchar2 (5)			
+Math		Number (6, 2)
+Physics		Number (6, 2)
+Computer	Number (6, 2)
+Birthday            Date
+
+Query:
+CREATE TABLE Student
+(
+    Roll NUMBER(5),
+    Name VARCHAR2(30),
+    Age NUMBER(5),
+    Course VARCHAR2(5),
+    Math NUMBER(6,2),
+    Physics NUMBER(6,2),
+    Computer NUMBER(6,2),
+    Birthday DATE
+);
+
+DESC Student;
+
+
+4. Create table MSc from the Student table with the same fields and same structure but without any data.
+
+
+Query:
+CREATE TABLE MSc AS 
+SELECT * FROM Student
+WHERE 1=2;
+
+5. Display the structure of MSc table.
+
+Query:
+CREATE TABLE MSc AS 
+SELECT * FROM Student
+WHERE 1=2;
+
+DESC MSc;
+
+6. Create table ‘MCA’ from the Student table with the same fields and same structure but without any data. Rename Course with Department and Name with First Name.
+
+Query:
+CREATE TABLE MCA AS
+SELECT
+    Roll,
+    Name AS First_Name,
+    Age,
+    Course AS Department,
+    Math,
+    Physics,
+    Computer,
+    Birthday
+FROM Student
+WHERE 1=2;
+
+
+7. Display the structure of MCA table.
+
+Query:
+CREATE TABLE MCA AS
+SELECT
+    Roll,
+    Name AS First_Name,
+    Age,
+    Course AS Department,
+    Math,
+    Physics,
+    Computer,
+    Birthday
+FROM Student
+WHERE 1=2;
+
+DESC MCA;
+
+
+
+8.	Insert  following records into the Student table:-
+
+•	1, Rahul,19,BCA,79.5,67,89,15-jun-93
+•	2,Kunal,21,BCA,68,76,59.5,16-aug-91
+•	3,Aditi,20,MSc,90,73,56,20-sep-92
+•	4,Sumit,20,MCA,57.5,78,81,07-dec-91
+•	5,Anirban,22,MCA,80,68,63,15-sep-94
+•	6,Kumkum,21,BCA,72,54.5,60,08-feb-95
+•	7,Suman,21,BCA,91.5,32,61,10-mar-94
+•	8,Rohit,22,MSc,85,76,92,19-apr-92
+
+
+Query:
+INSERT INTO Student
+VALUES (1, 'Rahul', 19 , 'BCA', 79.5, 67, 89, '15-JUN-93');
+
+INSERT INTO Student
+VALUES (2, 'Kunal', 21 , 'BCA', 68, 76, 59.5, '16-AUG-91');
+
+INSERT INTO Student
+VALUES (3, 'Aditi', 20 , 'MSc', 90, 73, 56, '20-SEP-92');
+
+INSERT INTO Student
+VALUES (4, 'Summit', 20 , 'MCA', 57.5, 78, 81, '07-DEC-91');
+
+INSERT INTO Student
+VALUES (5, 'Anirban', 22 , 'MCA', 80, 68, 83, '15-SEP-94');
+
+INSERT INTO Student
+VALUES (6, 'Kumkum', 21 , 'BCA', 72, 54.5, 60, '08-FEB-95');
+
+INSERT INTO Student
+VALUES (7, 'Suman', 21 , 'BCA', 91.5, 32, 61, '10-MAR-94');
+
+INSERT INTO Student
+VALUES (8, 'Rohit', 22 , 'MSc', 85, 76, 92, '19-APR-92');
+
+COMMIT;
+
+
+
+9.	Display all the students’ details from Student table.
+
+
+Query:
+INSERT INTO Student
+VALUES (1, 'Rahul', 19 , 'BCA', 79.5, 67, 89, '15-JUN-93');
+
+INSERT INTO Student
+VALUES (2, 'Kunal', 21 , 'BCA', 68, 76, 59.5, '16-AUG-91');
+
+INSERT INTO Student
+VALUES (3, 'Aditi', 20 , 'MSc', 90, 73, 56, '20-SEP-92');
+
+INSERT INTO Student
+VALUES (4, 'Sumit', 20 , 'MCA', 57.5, 78, 81, '07-DEC-91');
+
+INSERT INTO Student
+VALUES (5, 'Anirban', 22 , 'MCA', 80, 68, 83, '15-SEP-94');
+
+INSERT INTO Student
+VALUES (6, 'kumkum', 21 , 'BCA', 72, 54.5, 60, '08-FEB-95');
+
+INSERT INTO Student
+VALUES (7, 'Suman', 21 , 'BCA', 91.5, 32, 61, '10-MAR-94');
+
+INSERT INTO Student
+VALUES (8, 'Rohit', 22 , 'MSc', 85, 76, 92, '19-APR-92');
+
+COMMIT;
+
+SELECT * FROM Student;
+
+
+
+10. Find out the details of the students with roll no 5 from Student table.
+
+Query:
+SELECT * FROM Student 
+WHERE Roll= 5;
+
+11.	Show the roll, name, marks of all subjects for all students from Student table.
+
+Query:
+SELECT Roll,
+       Name,
+       Math,
+       Physics,
+       Computer
+FROM Student;
+
+12. Show the roll, name, marks of all subjects for all students from Student table.
+
+Query:
+SELECT * FROM Student 
+WHERE Course= 'BCA';
+
+13. Insert data in the ‘MCA’ table from ‘Student’ table where course is MCA.
+
+Query:
+INSERT INTO MCA 
+SELECT * FROM Student
+WHERE Course = 'MCA';
+
+14. Insert data in the ‘MSc’ table from ‘Student’ table where course is MSc.
+
+Query:
+INSERT INTO MSc
+SELECT * FROM Student
+WHERE Course = 'MSc';
+
+COMMIT;
+
+15. Display the structure of ‘Student’ and ‘MCA’ table.
+
+Query:
+DESC Student;
+DESC MCA;
+
+16. Display all the details of each student in ‘Student’ table with Course appearing first in the display column list.
+
+Query:
+SELECT Course,
+       Roll,
+       Name,
+       Math,
+       Physics,
+       Computer,
+       Birthday
+FROM Student;
+
+17. Update the Math marks of the student with Roll no 7 from 91 to 95 in the ‘Student’ table.
+
+Query:
+UPDATE Student
+SET Math = 95
+WHERE Roll = 7;
+COMMIT;
+
+18. Update the Name of the student with Roll no 4 from Sumit to Sumitava in ‘MCA’ table.
+
+Query:
+UPDATE MCA
+SET First_Name = 'Sumitava'
+WHERE Roll = 4;
+COMMIT;
+
+19. Delete the details of the student with Roll no 2 from the ‘Student’ table.
+
+Query:
+DELETE FROM Student
+WHERE Roll=2;
+COMMIT;
+
+20. Delete the details of all students from the ‘Student’ table.
+
+Query:
+DELETE FROM Student
+COMMIT;
+
+
+
+
+
+
+
+
+
