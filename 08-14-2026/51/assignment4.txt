@@ -1,0 +1,7 @@
+CREATE TABLE EMP_trainee (
+    Emp_id NUMBER(2),
+    Name VARCHAR2(15),
+    Basic NUMBER(6),
+    Designation VARCHAR2(10),
+    Age NUMBER(2)
+);
