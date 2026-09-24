@@ -1,0 +1,214 @@
+1.	Create the following tables with the constraints mentioned: 
+        Note: the data type and size should be give in relevance with the data to  
+be inserted. Constraint name are not required to be given for this assignment.
+ Customer                                                                       Movie
+Cust_id	Fname	Lname	 Area		Phone				Mv_no		Cust_id		Title			Star	Price
+Primary Not Null	 Not Null					Primary Key	Foreign         Not Null                Not
+Key																Null	Should be between 100 and 250
+A01     Ivan    Ross     SA             6125467                         1               A02             Bloody                   JC
+A02	Vandana	Ray	 MU		5560379				2		A04		The Firm	         TC		200
+A03	Pramada	Jauguste DA		4560389				3		A01		Pretty Woman	         RG		151
+A04	Basu	Navindi	 BA		6125401				4		A06		Home Alone	         MC		150
+A05	Ravi	Shridhar NA	       	null				5		A05		The Fugitive	         MF		200
+A06	Rukmini	Aiyer	 GH		5125274				6		A03		Coma	                 MD		100	
+									7		A02		Dracula	                 GO		150	
+									8		A06		Quick Change		 BM		100
+									9		A03		Gone with the Wind	 CB	        200
+									10		A05		Carry on Doctor	         LP		100        
+Query:
+CREATE TABLE Customer
+(
+    Cust_id VARCHAR2(3) PRIMARY KEY,
+    Fname VARCHAR2(15),
+    Lname VARCHAR2(15),
+    Area VARCHAR2(2),
+    Phone NUMBER(7)
+);
+
+CREATE TABLE Movie
+(
+    Mv_no NUMBER(2) PRIMARY KEY,
+    Cust_id VARCHAR2(3) NOT NULL,
+    Title VARCHAR2(20) NOT NULL,
+    Star VARCHAR2(2) NOT NULL,
+    Price NUMBER(3) CHECK (Price Between 100 AND 250),
+    FOREIGN KEY (Cust_id) REFERENCES Customer(Cust_id)
+);
+
+INSERT INTO CUSTOMER VALUES
+('A01','Ivan','Ross','SA',6125467);
+INSERT INTO CUSTOMER VALUES
+('A02','Vandana','Ray','MU',5560379);
+INSERT INTO CUSTOMER VALUES
+('A03','Pramada','Jauguste','DA',4560389);
+INSERT INTO CUSTOMER VALUES
+('A04','Basu','Navindi','BA',6125401);	
+INSERT INTO CUSTOMER VALUES
+('A05','Ravi','Shridhar','NA',NULL);
+INSERT INTO CUSTOMER VALUES
+('A06','Rukmini','Aiyer','GH',5125274);
+COMMIT;
+
+
+INSERT INTO Movie VALUES
+(1,'A02','Bloody','JC',181);
+INSERT INTO Movie VALUES
+(2,'A04','The Firm','TC',200);
+INSERT INTO Movie VALUES
+(3,'A01','Pretty Woman','RG',151);
+INSERT INTO Movie VALUES
+(4,'A06','Home Alone','MC',150);
+INSERT INTO Movie VALUES
+(5,'A05','The Figitive','MF',200);
+INSERT INTO Movie VALUES
+(6,'A03','Coma','MD',100);
+INSERT INTO Movie VALUES
+(7,'A02','Dracula','GO',150);
+INSERT INTO Movie VALUES
+(8,'A06','Quick Change','BM',100);
+INSERT INTO Movie VALUES
+(9,'A03','Gone with the Wind','CB',200);
+INSERT INTO Movie VALUES
+(10,'A05','Carry on Doctor','LP',100);
+
+
+
+2. Prove that entity integrity constraint is ensured by both the tables. (2 conditions to be checked).
+
+Query:
+INSERT INTO Customer VALUES
+(NULL, 'Test', 'User', 'AA', 1234567,1);
+INSERT INTO Movie VALUES
+(NULL, 'A01', 'Test Movie', 'XX', 150);
+INSERT INTO Customer VALUES
+('A01', 'Test', 'User', 'AA', 1234567,1);
+INSERT INTO Movie VALUES
+(1,'A01','Test Movie','XX',150);
+
+3. Prove that referential integrity constraint is ensured by both the tables.
+
+Query:
+INSERT INTO Movie VALUES
+(11, 'A01', 'Test Movie', 'XX', 150);
+
+4. Prove that domain integrity constraint is ensured by the Movie table.
+
+Query:
+INSERT INTO Movie VALUES
+(12, 'A01', 'Test Movie', 'XX', 300);
+
+5. Display the movie titles, whose price is greater than 100 but less than 200.
+
+Query:
+SELECT Title FROM Movie WHERE Price > 100 AND Price < 200;
+
+6. Display the Cust_id who have seen movies having stars as either JC or TC or MC.
+
+Query:
+SELECT Cust_id FROM Movie WHERE Star IN('JC','TC','MC');
+
+7. Display the details of those customers who have an A in their area name.
+
+Query:
+SELECT * FROM Customer WHERE Area LIKE '%A%';
+
+8. Display the movie titles, whose price is within 180 and the movie titles are of exactly 6 characters.
+
+Query:
+SELECT Title FROM Movie WHERE Price<=180 AND LENGTH(Title)=6;
+
+9. Display the movie name, their original prices and the prices after 10% increment. Give alias name to the incremented price column.
+
+Query:
+SELECT Title, Price, Price*1.10 AS Incremented Price FROM Movie;
+
+10. Display all the customer details in the following way:
+‘Ivan Ross stays in SA and his phone number is 6125467.’
+
+Query:
+SELECT Fname || ' ' || Lname || 
+' stays in ' || Area || ' and his phone number is ' || Phone || '.' AS Customer_Details
+FROM Customer;
+
+
+11. Add a not null constraint to the Lname field in Customer.
+
+Query:
+ALTER TABLE Customer MODIFY Lname VARCHAR2(15) NOT NULL;
+
+12. Display the customer name whose phone number is not recorded.
+
+Query:
+SELECT Fname, Lname FROM Customer WHERE Phone IS NULL;
+
+13. Add the phone number according to your own wish for the person mentioned in problem no 7.
+
+Query:
+UPDATE Customer SET Phone= 9867919 WHERE Cust_id='A05';
+
+14. Display the unique customer id’s from movie table.
+
+Query:
+SELECT DISTINCT Cust_id FROM Movie;
+
+15. Remove the not null constraint from Star column in movie table.
+
+Query:
+ALTER TABLE Movie MODIFY Star VARCHAR2(2) NULL;
+
+
+16. Delete any row from the Customer table. If you cannot delete, then note the error message displayed.
+
+Query:
+DELETE FROM Customer WHERE Cust_id='A02';
+
+17. Delete any row from the Movie table. If you cannot delete, then note the error message displayed.
+
+Query:
+DELETE FROM Movie WHERE Mv_no=1;
+
+18. Drop the Customer table. If you cannot drop, then note the error message displayed.
+
+Query:
+DROP TABLE Customer;
+
+
+19. Drop the Movie table. If you cannot drop, then note the error message displayed.
+
+Query:
+DROP TABLE Movie;
+
+20. Drop the foreign key from Movie table.
+
+Query:
+ALTER TABLE Movie DROP CONSTRAINT fk_movie_customer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
