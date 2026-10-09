@@ -1,0 +1,7 @@
+CREATE TABLE Products_Master (
+    Product_no VARCHAR2(10) CONSTRAINT pk_product_no PRIMARY KEY CONSTRAINT chk_product_no CHECK (Product_no LIKE 'P%'),
+    Description VARCHAR2(100) CONSTRAINT nn_desc NOT NULL CONSTRAINT uq_desc UNIQUE,
+    Qty_on_hand NUMBER CONSTRAINT chk_qty CHECK (Qty_on_hand > 10),
+    Sell_price NUMBER CONSTRAINT nn_sell_price NOT NULL,
+    Cost_price NUMBER CONSTRAINT nn_cost_price NOT NULL
+);
