@@ -1,0 +1,6 @@
+CREATE TABLE Department_Project (
+    Dept_ID NUMBER,
+    Project_ID NUMBER,
+    Project_Name VARCHAR2(50),
+    CONSTRAINT pk_dept_proj PRIMARY KEY (Dept_ID, Project_ID)
+);
