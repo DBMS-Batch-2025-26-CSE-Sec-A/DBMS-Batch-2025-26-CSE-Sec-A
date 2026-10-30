@@ -1,0 +1,7 @@
+CREATE TABLE Project_Assignments (
+    Assignment_ID NUMBER PRIMARY KEY,
+    Employee_ID NUMBER,
+    Dept_ID NUMBER,
+    Project_ID NUMBER,
+    CONSTRAINT fk_dept_proj FOREIGN KEY (Dept_ID, Project_ID) REFERENCES Department_Project(Dept_ID, Project_ID)
+);
