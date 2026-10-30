@@ -1,0 +1,7 @@
+CREATE TABLE Client_Master (
+    Client_no VARCHAR2(10) CONSTRAINT pk_client_no PRIMARY KEY CONSTRAINT chk_client_no CHECK (Client_no LIKE 'C%'),
+    Name VARCHAR2(50) CONSTRAINT nn_name NOT NULL CONSTRAINT uq_name UNIQUE,
+    Address1 VARCHAR2(100),
+    State VARCHAR2(50),
+    City VARCHAR2(50) CONSTRAINT chk_city CHECK (City IN ('Delhi', 'Mumbai', 'Chennai'))
+);
