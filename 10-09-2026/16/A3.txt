@@ -1,0 +1,7 @@
+CREATE TABLE Sales_Order (
+    S_order_no VARCHAR2(10) CONSTRAINT pk_s_order_no PRIMARY KEY CONSTRAINT chk_s_order_no CHECK (S_order_no LIKE 'O%'),
+    S_order_date DATE,
+    Client_no VARCHAR2(10) CONSTRAINT fk_client_no REFERENCES Client_Master(Client_no),
+    Salesman_no VARCHAR2(10) CONSTRAINT chk_salesman_no CHECK (Salesman_no LIKE 'S%'),
+    Product_no VARCHAR2(10) CONSTRAINT fk_product_no REFERENCES Products_Master(Product_no)
+);
