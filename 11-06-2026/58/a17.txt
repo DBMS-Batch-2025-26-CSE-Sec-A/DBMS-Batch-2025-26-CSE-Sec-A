@@ -1,0 +1,1 @@
+SELECT FNAME || ' whose designation is ' || JOB_ID || ' gets ' || SAL || ' but wants to earn ' || (3 * SAL) || '.' AS "EMPLOYEE_WISH" FROM EMP;
