@@ -1,0 +1,1 @@
+SELECT m.Title, i.Cust_id, i.Mv_no FROM Movie m, Invoice i WHERE m.Mv_no = i.Mv_no;
