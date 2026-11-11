@@ -1,0 +1,27 @@
+CREATE TABLE Cultural_Stud (
+    ROLL NUMBER(5) CONSTRAINT pk_cul_roll PRIMARY KEY,
+    NAME VARCHAR2(20) CONSTRAINT uq_cul_name UNIQUE,
+    DEPT VARCHAR2(10) CONSTRAINT chk_cul_dept CHECK (DEPT IN ('IT', 'CS')),
+    CUL_FEES NUMBER(10, 2) CONSTRAINT chk_cul_fees CHECK (CUL_FEES >= 600)
+);
+
+CREATE TABLE Sports_Stud (
+    ROLL NUMBER(5) CONSTRAINT pk_sp_roll PRIMARY KEY,
+    NAME VARCHAR2(20) CONSTRAINT uq_sp_name UNIQUE,
+    DEPT VARCHAR2(10) CONSTRAINT chk_sp_dept CHECK (DEPT IN ('IT', 'CS')),
+    SPORTS_FEE NUMBER(10, 2) CONSTRAINT chk_sp_fee CHECK (SPORTS_FEE >= 1000)
+);
+
+INSERT INTO Cultural_Stud VALUES (1, 'Aman', 'IT', 700);
+INSERT INTO Cultural_Stud VALUES (2, 'Binay', 'IT', 700);
+INSERT INTO Cultural_Stud VALUES (3, 'Bipul', 'CS', 600);
+INSERT INTO Cultural_Stud VALUES (4, 'Joy', 'CS', 600);
+INSERT INTO Cultural_Stud VALUES (5, 'Surojit', 'IT', 700);
+INSERT INTO Cultural_Stud VALUES (6, 'Wasim', 'CS', 600);
+
+INSERT INTO Sports_Stud VALUES (1, 'Aman', 'IT', 1000);
+INSERT INTO Sports_Stud VALUES (7, 'Rohan', 'CS', 1200);
+INSERT INTO Sports_Stud VALUES (2, 'Binay', 'IT', 1000);
+INSERT INTO Sports_Stud VALUES (8, 'Kiran', 'CS', 1500);
+
+COMMIT;
