@@ -1,0 +1,5 @@
+UPDATE Sales_Order 
+SET S_order_date = TO_DATE('24-JUL-1996', 'DD-MON-YYYY'), 
+    Product_no = 'P_VALUE', 
+    Salesman_no = 'S_VALUE' 
+WHERE Client_no = 'C_VALUE';
