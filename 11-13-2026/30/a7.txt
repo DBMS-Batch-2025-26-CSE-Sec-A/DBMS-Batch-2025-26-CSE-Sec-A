@@ -1,1 +1,0 @@
-SELECT 'The movie taken by ' || c.Fname || ' ' || c.Lname || ' is ' || m.Title || '.' AS "MOVIE_ISSUED" FROM Customer c, Invoice i, Movie m WHERE c.Cust_id = i.Cust_id AND i.Mv_no = m.Mv_no AND i.Mv_no >= 3;
