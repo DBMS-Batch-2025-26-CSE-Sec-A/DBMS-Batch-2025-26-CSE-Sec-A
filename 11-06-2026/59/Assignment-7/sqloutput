@@ -1,0 +1,542 @@
+
+Table EMPLOYEE_DETAILS created.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+NAME                
+--------------------
+kevin
+trenna
+curtis
+randall
+peter
+eleni
+ellen
+jonathon
+michael
+pat
+
+10 rows selected. 
+
+
+NAME                     
+-------------------------
+HUNOLD
+ERNST
+LORENTZ
+WHALEN
+HIGGINS
+GIETZ
+
+6 rows selected. 
+
+
+JOB       
+----------
+Ad_Pres
+Ad_Vp
+Ad_Vp
+It_Prog
+It_Prog
+It_Prog
+St_Man
+St_Clerk
+St_Clerk
+St_Clerk
+St_Clerk
+
+JOB       
+----------
+Sa_Man
+Sa_Rep
+Sa_Rep
+Sa_Rep
+Ad_Asst
+Mk_Man
+Mk_Rep
+Ac_Mgr
+Ac_Account
+
+20 rows selected. 
+
+
+FULL_NAME                                     
+----------------------------------------------
+Steven King
+Neena Kochhar
+Lex De Haan
+Alexander Hunold
+Bruce Ernst
+Diana Lorentz
+Kevin Mourgos
+Trenna Rajs
+Curtis Davies
+Randall Matos
+Peter Vargas
+
+FULL_NAME                                     
+----------------------------------------------
+Eleni Zlotkey
+Ellen Abel
+Jonathon Taylor
+Kimberely Grant
+Jennifer Whalen
+Michael Hartstein
+Pat Fay
+Shelley Higgins
+William Gietz
+
+20 rows selected. 
+
+
+LAST_NAME                 NAME_LENGTH
+------------------------- -----------
+Zlotkey                             7
+Abel                                4
+Taylor                              6
+Grant                               5
+
+
+FULL_NAME                                      NAME_LENGTH   POSITION
+---------------------------------------------- ----------- ----------
+Trenna Rajs                                              4          2
+Curtis Davies                                            6          2
+Randall Matos                                            5          2
+Peter Vargas                                             6          2
+
+
+SALARY    
+----------
+$$$$$24000
+$$$$$17000
+$$$$$17000
+$$$$$$9000
+$$$$$$6000
+$$$$$$4200
+$$$$$$5800
+$$$$$$3500
+$$$$$$3100
+$$$$$$2600
+$$$$$$2500
+
+SALARY    
+----------
+$$$$$10500
+$$$$$11000
+$$$$$$8600
+$$$$$$7000
+$$$$$$4400
+$$$$$13000
+$$$$$$6000
+$$$$$12000
+$$$$$$8300
+
+20 rows selected. 
+
+
+TRIMMED             
+--------------------
+steven
+neena
+lex
+alexander
+bruc
+kevin
+trenna
+peter
+leni
+llen
+kimberely
+
+TRIMMED             
+--------------------
+jennifer
+michael
+shelley
+
+14 rows selected. 
+
+
+DEPARTMENT_ID     SALARY HIRE_DAT
+------------- ---------- --------
+           90      24000 17-06-87
+           50       3500 17-10-96
+           50       3100 29-01-97
+
+
+FIRST_NAME           JOB_ID       POSITION
+-------------------- ---------- ----------
+Steven               AD_PRES             3
+Neena                AD_VP               2
+Lex                  AD_VP               2
+Alexander            IT_PROG             3
+Bruce                IT_PROG             5
+Kevin                ST_MAN              2
+Trenna               ST_CLERK            3
+Peter                ST_CLERK            2
+Eleni                SA_MAN              1
+Ellen                SA_REP              1
+Kimberely            SA_REP              5
+
+FIRST_NAME           JOB_ID       POSITION
+-------------------- ---------- ----------
+Jennifer             AD_ASST             2
+Michael              MK_MAN              6
+Shelley              AC_MGR              3
+
+14 rows selected. 
+
+
+LAST_NAME                
+-------------------------
+Abel
+Taylor
+Grant
+Fay
+
+
+FIRST_NAME               SALARY  REMAINDER
+-------------------- ---------- ----------
+Ellen                     11000       2000
+Jonathon                   8600       2600
+Kimberely                  7000       1000
+
+
+SALARY         
+---------------
+     $24,000.00
+     $17,000.00
+     $17,000.00
+      $9,000.00
+      $6,000.00
+      $4,200.00
+      $5,800.00
+      $3,500.00
+      $3,100.00
+      $2,600.00
+      $2,500.00
+
+SALARY         
+---------------
+     $10,500.00
+     $11,000.00
+      $8,600.00
+      $7,000.00
+      $4,400.00
+     $13,000.00
+      $6,000.00
+     $12,000.00
+      $8,300.00
+
+20 rows selected. 
+
+
+SALARY  
+--------
+  $24000
+  $17000
+  $17000
+   $9000
+   $6000
+   $4200
+  $12000
+   $8300
+
+8 rows selected. 
+
+
+LAST_NAME                 COMM                                    
+------------------------- ----------------------------------------
+King                      No Commission                           
+Kochhar                   No Commission                           
+De Haan                   No Commission                           
+Hunold                    No Commission                           
+Ernst                     No Commission                           
+Lorentz                   No Commission                           
+Mourgos                   No Commission                           
+Rajs                      No Commission                           
+Davies                    No Commission                           
+Matos                     No Commission                           
+Vargas                    No Commission                           
+
+LAST_NAME                 COMM                                    
+------------------------- ----------------------------------------
+Zlotkey                   .2                                      
+Abel                      .3                                      
+Taylor                    .2                                      
+Grant                     .15                                     
+Whalen                    No Commission                           
+Hartstein                 No Commission                           
+Fay                       No Commission                           
+Higgins                   No Commission                           
+Gietz                     No Commission                           
+
+20 rows selected. 
+
+
+FIRST_NAME           WEEKS_WORKED
+-------------------- ------------
+Steven                    2056.12
+Neena                     1937.97
+Lex                       1765.12
+Alexander                 1923.12
+Bruce                     1851.26
+Diana                     1448.54
+Kevin                     1408.26
+Trenna                    1568.97
+Curtis                    1554.12
+Randall                   1495.54
+Peter                     1478.97
+
+FIRST_NAME           WEEKS_WORKED
+-------------------- ------------
+Eleni                     1397.69
+Ellen                     1591.69
+Jonathon                  1494.26
+Kimberely                  1433.4
+Jennifer                  2042.97
+Michael                   1603.69
+Pat                       1525.54
+Shelley                   1692.26
+William                   1692.26
+
+20 rows selected. 
+
+
+FIRST_NAME           YEARS_WORKED
+-------------------- ------------
+Steven                         39
+Neena                          37
+Lex                            34
+Alexander                      37
+Bruce                          35
+Diana                          28
+Kevin                          27
+Trenna                         30
+Curtis                         30
+Randall                        29
+Peter                          28
+
+FIRST_NAME           YEARS_WORKED
+-------------------- ------------
+Eleni                          27
+Ellen                          31
+Jonathon                       29
+Kimberely                      27
+Jennifer                       39
+Michael                        31
+Pat                            29
+Shelley                        32
+William                        32
+
+20 rows selected. 
+
+
+FIRST_NAME           MONTHS_WORKED
+-------------------- -------------
+Steven                      472.83
+Neena                        445.7
+Lex                         405.96
+Alexander                   442.28
+Bruce                        425.7
+Diana                       333.16
+Kevin                       323.86
+Trenna                      360.83
+Curtis                      357.45
+Randall                      343.9
+Peter                       340.09
+
+FIRST_NAME           MONTHS_WORKED
+-------------------- -------------
+Eleni                       321.45
+Ellen                          366
+Jonathon                    343.61
+Kimberely                   329.61
+Jennifer                    469.83
+Michael                     368.83
+Pat                         350.83
+Shelley                     389.16
+William                     389.16
+
+20 rows selected. 
+
+
+FIRST_NAME           LAST_DAY
+-------------------- --------
+Steven               30-06-87
+Neena                30-09-89
+Lex                  31-01-93
+Alexander            31-01-90
+Bruce                31-05-91
+Diana                28-02-99
+Kevin                30-11-99
+Trenna               31-10-96
+Curtis               31-01-97
+Randall              31-03-98
+Peter                31-07-98
+
+FIRST_NAME           LAST_DAY
+-------------------- --------
+Eleni                31-01-00
+Ellen                31-05-96
+Jonathon             31-03-98
+Kimberely            31-05-99
+Jennifer             30-09-87
+Michael              29-02-96
+Pat                  31-08-97
+Shelley              30-06-94
+William              30-06-94
+
+20 rows selected. 
+
+
+FIRST_NAME           HIRE_YEAR                                 
+-------------------- ------------------------------------------
+Steven               NINETEEN EIGHTY-SEVEN                     
+Neena                NINETEEN EIGHTY-NINE                      
+Lex                  NINETEEN NINETY-THREE                     
+Alexander            NINETEEN NINETY                           
+Bruce                NINETEEN NINETY-ONE                       
+Diana                NINETEEN NINETY-NINE                      
+Kevin                NINETEEN NINETY-NINE                      
+Trenna               NINETEEN NINETY-SIX                       
+Curtis               NINETEEN NINETY-SEVEN                     
+Randall              NINETEEN NINETY-EIGHT                     
+Peter                NINETEEN NINETY-EIGHT                     
+
+FIRST_NAME           HIRE_YEAR                                 
+-------------------- ------------------------------------------
+Eleni                TWO THOUSAND                              
+Ellen                NINETEEN NINETY-SIX                       
+Jonathon             NINETEEN NINETY-EIGHT                     
+Kimberely            NINETEEN NINETY-NINE                      
+Jennifer             NINETEEN EIGHTY-SEVEN                     
+Michael              NINETEEN NINETY-SIX                       
+Pat                  NINETEEN NINETY-SEVEN                     
+Shelley              NINETEEN NINETY-FOUR                      
+William              NINETEEN NINETY-FOUR                      
+
+20 rows selected. 
+
+
+FUTURE D
+--------
+11-04-27
+
+
+NAME                                           DAY                                  JOINING_DATE        
+---------------------------------------------- ------------------------------------ --------------------
+Steven King                                    WEDNESDAY                            17-JUN-1987         
+Neena Kochhar                                  THURSDAY                             21-SEP-1989         
+Lex De Haan                                    WEDNESDAY                            13-JAN-1993         
+Alexander Hunold                               WEDNESDAY                            03-JAN-1990         
+Bruce Ernst                                    TUESDAY                              21-MAY-1991         
+Diana Lorentz                                  SUNDAY                               07-FEB-1999         
+Kevin Mourgos                                  TUESDAY                              16-NOV-1999         
+Trenna Rajs                                    THURSDAY                             17-OCT-1996         
+Curtis Davies                                  WEDNESDAY                            29-JAN-1997         
+Randall Matos                                  SUNDAY                               15-MAR-1998         
+Peter Vargas                                   THURSDAY                             09-JUL-1998         
+
+NAME                                           DAY                                  JOINING_DATE        
+---------------------------------------------- ------------------------------------ --------------------
+Eleni Zlotkey                                  SATURDAY                             29-JAN-2000         
+Ellen Abel                                     SATURDAY                             11-MAY-1996         
+Jonathon Taylor                                TUESDAY                              24-MAR-1998         
+Kimberely Grant                                MONDAY                               24-MAY-1999         
+Jennifer Whalen                                THURSDAY                             17-SEP-1987         
+Michael Hartstein                              SATURDAY                             17-FEB-1996         
+Pat Fay                                        SUNDAY                               17-AUG-1997         
+Shelley Higgins                                TUESDAY                              07-JUN-1994         
+William Gietz                                  TUESDAY                              07-JUN-1994         
+
+20 rows selected. 
+
+
+FIRST_NAME           ANNUAL_SALARY ROUNDED_SALARY
+-------------------- ------------- --------------
+Steven                                           
+Neena                                            
+Lex                                              
+Alexander                                        
+Bruce                                            
+Diana                                            
+Kevin                                            
+Trenna                                           
+Curtis                                           
+Randall                                          
+Peter                                            
+
+FIRST_NAME           ANNUAL_SALARY ROUNDED_SALARY
+-------------------- ------------- --------------
+Eleni                     126000.2       126000.2
+Ellen                     132000.3       132000.3
+Jonathon                  103200.2       103200.2
+Kimberely                 84000.15       84000.15
+Jennifer                                         
+Michael                                          
+Pat                                              
+Shelley                                          
+William                                          
+
+20 rows selected. 
+
