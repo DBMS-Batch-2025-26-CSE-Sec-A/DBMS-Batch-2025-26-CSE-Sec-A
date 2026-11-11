@@ -1,5 +1,5 @@
 Create Database ass06;
-use ass06;
+use day06;
 
 #Q1
 create table emp(
