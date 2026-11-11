@@ -1,0 +1,1 @@
+ALTER TABLE EMP DROP CONSTRAINT chk_dept_id;
