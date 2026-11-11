@@ -1,0 +1,4 @@
+ALTER TABLE Sports_Stud DROP CONSTRAINT chk_sp_dept;
+ALTER TABLE Sports_Stud DROP CONSTRAINT chk_sp_fee;
+ALTER TABLE Cultural_Stud DROP CONSTRAINT chk_cul_dept;
+ALTER TABLE Cultural_Stud DROP CONSTRAINT chk_cul_fees;
