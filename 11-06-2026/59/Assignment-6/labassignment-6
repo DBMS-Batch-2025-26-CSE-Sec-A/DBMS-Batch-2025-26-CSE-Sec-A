@@ -1,0 +1,253 @@
+
+Table EMP created.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+JOB_ID               TOTAL_EMPLOYEES
+-------------------- ---------------
+SH_CLERK                           3
+AD_ASST                            2
+IT_PROG                            2
+AC_MGR                             2
+AD_VP                              1
+AD_PRES                            1
+
+6 rows selected. 
+
+
+TOTAL_MANAGERS
+--------------
+             2
+
+
+SALARY_DIFFERENCE
+-----------------
+             7200
+
+
+MAX_SALARY AVG_SALARY
+---------- ----------
+      6000       5500
+
+
+FIRST_NAME           LAST_NAME           
+-------------------- --------------------
+Donald               William             
+
+
+First Hi Last Hir
+-------- --------
+26-11-76 10-07-03
+
+
+MAX_SALARY AVG_SALARY
+---------- ----------
+      3400       3000
+
+
+   DEPT_ID MIN_SALARY
+---------- ----------
+        50       2600
+        10       4400
+        20       6000
+        40       7500
+        90       9500
+        60       2300
+       100       8956
+        30       3400
+
+8 rows selected. 
+
+
+   DEPT_ID MIN_SALARY
+---------- ----------
+        90       9500
+       100       8956
+        40       7500
+        20       6000
+        10       4400
+        30       3400
+
+6 rows selected. 
+
+
+DETAILS                                                                                                                                                                 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Donald whose designation is SH_CLERK gets 2600 but wants to earn 7800.
+Douglas whose designation is SH_CLERK gets 3000 but wants to earn 9000.
+Jennifer whose designation is AD_ASST gets 4400 but wants to earn 13200.
+Michael whose designation is IT_PROG gets 6000 but wants to earn 18000.
+Pat whose designation is AC_MGR gets 6500 but wants to earn 19500.
+Susan whose designation is AD_VP gets 7500 but wants to earn 22500.
+Hermann whose designation is AD_PRES gets 9500 but wants to earn 28500.
+Shelley whose designation is AC_MGR gets 2300 but wants to earn 6900.
+William whose designation is IT_PROG gets 5000 but wants to earn 15000.
+Steven whose designation is AD_ASST gets 8956 but wants to earn 26868.
+Neena whose designation is SH_CLERK gets 3400 but wants to earn 10200.
+
+11 rows selected. 
+
+
+EMPLOYEE_DETAILS                                                                                                                                                                                                  
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+198, Donald, Connell, 21-JUN-99, SH_CLERK, 2600, 50
+199, Douglas, Grant, 13-JAN-98, SH_CLERK, 3000, 50
+200, Jennifer, Whalen, 17-SEP-87, AD_ASST, 4400, 10
+201, Michael, Hartstein, 19-JAN-99, IT_PROG, 6000, 20
+202, Pat, Fay, 25-OCT-89, AC_MGR, 6500, 20
+203, Susan, Mavris, 26-NOV-76, AD_VP, 7500, 40
+204, Hermann, Baer, 23-AUG-95, AD_PRES, 9500, 90
+205, Shelley, Higgins, 24-FEB-98, AC_MGR, 2300, 60
+206, William, Gitz, 12-MAR-01, IT_PROG, 5000, 60
+100, Steven, King, 15-JUN-02, AD_ASST, 8956, 100
+101, Neena, Kochar, 10-JUL-03, SH_CLERK, 3400, 30
+
+11 rows selected. 
+
+
+TODAY   
+--------
+11-11-26
+
+
+      E_ID DA YEAR
+---------- -- ----
+       198 21 1999
+       199 13 1998
+       200 17 1987
+       201 19 1999
+       202 25 1989
+       203 26 1976
+       204 23 1995
+       205 24 1998
+       206 12 2001
+       100 15 2002
+       101 10 2003
+
+11 rows selected. 
+
+
+FNAME                HIRE_DATE                                 
+-------------------- ------------------------------------------
+Donald               21-JUNE     -99                           
+Douglas              13-JANUARY  -98                           
+Jennifer             17-SEPTEMBER-87                           
+Michael              19-JANUARY  -99                           
+Pat                  25-OCTOBER  -89                           
+Susan                26-NOVEMBER -76                           
+Hermann              23-AUGUST   -95                           
+Shelley              24-FEBRUARY -98                           
+William              12-MARCH    -01                           
+Steven               15-JUNE     -02                           
+Neena                10-JULY     -03                           
+
+11 rows selected. 
+
+
+      E_ID HIRE_MONTH                          
+---------- ------------------------------------
+       198 JUNE                                
+       199 JANUARY                             
+       200 SEPTEMBER                           
+       201 JANUARY                             
+       202 OCTOBER                             
+       203 NOVEMBER                            
+       204 AUGUST                              
+       205 FEBRUARY                            
+       206 MARCH                               
+       100 JUNE                                
+       101 JULY                                
+
+11 rows selected. 
+
+
+FNAME                      E_ID HIRE_DATE           
+-------------------- ---------- --------------------
+Donald                      198 21-JUN-1999         
+Douglas                     199 13-JAN-1998         
+Jennifer                    200 17-SEP-1987         
+Michael                     201 19-JAN-1999         
+Pat                         202 25-OCT-1989         
+Susan                       203 26-NOV-1976         
+Hermann                     204 23-AUG-1995         
+Shelley                     205 24-FEB-1998         
+William                     206 12-MAR-2001         
+Steven                      100 15-JUN-2002         
+Neena                       101 10-JUL-2003         
+
+11 rows selected. 
+
+
+FNAME                      E_ID HIRE_DATE                                   
+-------------------- ---------- --------------------------------------------
+Donald                      198 JUNE     -21-1999                           
+Douglas                     199 JANUARY  -13-1998                           
+Jennifer                    200 SEPTEMBER-17-1987                           
+Michael                     201 JANUARY  -19-1999                           
+Pat                         202 OCTOBER  -25-1989                           
+Susan                       203 NOVEMBER -26-1976                           
+Hermann                     204 AUGUST   -23-1995                           
+Shelley                     205 FEBRUARY -24-1998                           
+William                     206 MARCH    -12-2001                           
+Steven                      100 JUNE     -15-2002                           
+Neena                       101 JULY     -10-2003                           
+
+11 rows selected. 
+
+
+SYSTEM_YEAR                               
+------------------------------------------
+TWENTY TWENTY-SIX
+
+
+TODAY    AFTER_15 BEFORE_1
+-------- -------- --------
+11-11-26 26-11-26 27-10-26
+
+
+Table EMP altered.
+
+
+Table EMP altered.
+
+
+Table EMP altered.
+
+
+Table EMP altered.
+
+
+Table EMP dropped.
+
