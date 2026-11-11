@@ -1,1 +1,0 @@
-SELECT DISTINCT c.Fname, c.Lname FROM Customer c, Invoice i, Movie m WHERE c.Cust_id = i.Cust_id AND i.Mv_no = m.Mv_no AND m.Type = 'Action';

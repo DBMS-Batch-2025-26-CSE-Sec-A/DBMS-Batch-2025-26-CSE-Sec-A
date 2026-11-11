@@ -1,1 +1,0 @@
-SELECT m.Type, m.Mv_no FROM Movie m, Invoice i WHERE m.Mv_no = i.Mv_no AND i.Cust_id IN ('A01', 'A02');
