@@ -1,0 +1,166 @@
+Create the following table Employee_Details.
+ 
+Name         		Null 		Type
+EMPLOYEE_ID             NOT NULL	NUMBER(6)
+FIRST_NAME				VARCHAR2(20)
+LAST_NAME               NOT NULL	VARCHAR2(25)
+HIRE_DATE		NOT NULL	DATE
+JOB_ID			NOT NULL	VARCHAR2(10)
+SALARY					NUMBER(8,2)
+COMMISSION_PCT				NUMBER(2,2)				
+MANAGER_ID				NUMBER(6)
+DEPARTMENT_ID				NUMBER(4)
+
+EMPLOYEE_ID   FIRST_NAME	LAST_NAME	HIRE_DATE    JOB_ID	SALARY	COMMISSION_PCT	MANAGER_ID	DEPARTMENT_ID
+100	      Steven            King            17-JUN-87    AD_PRES    24000                                   90 
+101	      Neena		Kochhar		21-SEP-89    AD_VP      17000			100		90
+102	      Lex		DeHaan		13-JAN-93    AD_VP	17000			100		90
+103	      Alexander		Hunold		03-JAN-90    IT_PROG	9000			102		60
+104	      Bruce		Emst		21-MAY-91    IT_PROG	6000			103		60
+107           Diana		Lorentz		07-FEB-99    IT_PROG    4200 			103		60
+124	      Kevin		Mourgos		16-NOV-99    ST_MAN     5800			100		50
+141           Trenna		Rajs		17-OCT-95    ST_CLERK   3500			124		50
+142           Curtis		Davies		29-JAN-97    ST_CLERK	3100			124		50
+143           Randall		Matos		15-MAR-98    ST_CLERK	2600			124		50
+144           Peter		Vargas		09-JUL-98    ST_CLERK   2500			124		50
+149           Eleni		Zlotkey		29-JAN-00    SA_MAN	10500	 2		100		80
+174           Ellen		Abel		11-MAY-96    SA_REP	11000    3		149		80
+176           Jonathon          Taylor		24-MAR-98    SA_REP     8600	 2		149		80
+178           Kimberely		Grant		24-MAY-99    SA_REP     7000	 15		149
+200           Jennifer		Whalen		17-SEP-87    AD_ASST	4400			101		10
+201           Michael		Harstein	17-FEB-96    MK_MAN	13000			100		20
+202	      Pat		Fay		17-AUG-97    MK_REP	6000			201		20
+205	      Shelley		Higgins		07-JUN-94    AC_MGR	12000			101		110
+206	      William		Geitz		07-JUN-94    AC_ACCOUNT	8300			205		110  
+•	Execute all the problems using functions.
+•	Employee_id is the primary key of the table.
+
+
+1. Display the First Name of all employees in LOWER CASE , those who work in department no 20 or 50 or 80.
+
+Query:
+SELECT LOWER(FIRST_NAME) FROM EMPLOYEE_DETAILS WHERE DEPARTMENT_ID IN(20,50,80);
+
+2. Display the Last Name of all employees in UPPER CASE , those who work in department no 10 or 110 or 60.
+
+Query:
+SELECT UPPER(LAST_NAME) FROM EMPLOYEE_DETAILS WHERE DEPARTMENT_ID IN(10,110,60);
+
+3. Display all job_id in the format ‘ Sa_Rep’.
+
+Query:
+SELECT INITCAP(JOB_ID) FROM EMPLOYEE_DETAILS;
+
+4. Display the Name( Both First name and Last Name concatenated together) of all employees using function.
+
+Query:
+SELECT CONCAT(CONCAT(FIRST_NAME, ' '),LAST_NAME) AS NAME FROM EMPLOYEE_DETAILS;
+
+5. Find the length of the last names of the employees getting commission.
+
+Query:
+SELECT LAST_NAME,LENGTH(LAST_NAME) FROM EMPLOYEE_DETAILS WHERE COMMISSION_PCT IS NOT NULL;
+
+6.	Find out the numeric  position of the letter ‘a ‘ in the First Name of all employees.
+
+Query:
+SELECT FIRST_NAME, INSTR(FIRST_NAME, 'a') AS POSITION FROM EMPLOYEE_DETAILS;
+ 
+7.	Displays employee first names and last names joined together, the length of the employee last name, and the numeric position of the letter a in the employee 	last name for all employees who have the string CLERK contained in the job ID .
+
+Query:
+SELECT CONCAT(CONCAT(FIRST_NAME, ' '),LAST_NAME)AS NAME,LENGTH(LAST_NAME) AS LENGTH,INSTR(LAST_NAME, 'a')AS POSITION FROM EMPLOYEE_DETAILS WHERE JOB_ID LIKE '%CLERK%';
+
+8.	Display the salary of all employees in 10 digits. Pad the extra digits with ‘$’ either on the left or on the right hand side.
+
+Query:
+SELECT LPAD(SALARY, 10, '$') FROM EMPLOYEE DETAILS;
+
+9.	Trim ‘e’ from all employees first name who has an ‘e’ in their first name and display with the column renamed as ‘Trimmed’.
+
+Query:
+SELECT TRIM('e' FROM FIRST_NAME) AS TRIMMED FROM EMPLOYEE_DETAILS WHERE INSTR(LOWER(FIRST_NAME), 'e')>0;
+
+10.	Display the department_id, Salary and hire_date of those employees whose first name contains exactly 6 characters. Use function to display the result.
+
+Query:
+SELECT DEPARTMENT_ID, SALARY, TO_CHAR(HIRE_DATE, 'DD-MON-YYYY')FROM EMPLOYEE_DETAILS WHERE LENGTH(FIRST_NAME)=6;
+
+11.	Display the job_id of those employees whose first name contains ‘e’. Display the position of ‘e’ in their first name.
+
+Query:
+SELECT JOB_ID,INSTR(FIRST_NAME, 'e')AS POSITION FROM EMPLOYEE_DETAILS WHERE INSTR(FIRST_NAME, 'e')>0;
+
+12.	Display  the employee last name for all employees who have the string REP contained in the job ID starting at the fourth position of the job ID.
+
+Query:
+SELECT LAST_NAME FROM EMPLOYEE_DETAILS WHERE SUBSTR(JOB_ID, 4)='REP';
+
+13.	Calculate the remainder of the salaries after it is divided by 3000 for all employees whose job title is sales representative.
+
+Query:
+SELECT SALARY, MOD(SALARY,3000) AS REMAINDER FROM EMPLOYEE_DETAILS WHERE JOB_ID='SA_REP';
+
+14.	Display the salary of all employees in the format  ‘ $7,000.00’.
+
+Query:
+SELECT TO_CHAR(SALARY, 'FM$99,999.00')AS SALARY FROM EMPLOYEE_DETAILS;
+
+15.	Display the salary of all employees in the format  ‘ $7000’ who works in depatment 60 or 90 or 110.
+
+Query:
+SELECT TO_CHAR(SALARY, 'FM$99999') AS SALARY FROM EMPLOYEE_DETAILS WHERE DEPARTMENT_ID IN(60,90,110);
+
+16.	Create a query that displays the employees’ last names and commission amounts. If anemployee does not earn commission put “No Commission.” Label the column 	COMM.
+
+Query:
+SELECT LAST_NAME,NVL(TO_CHAR(COMMISSION_PCT), 'No Commission') AS COMM FROM EMPLOYEE_DETAILS;
+
+17.	Find the no. of days elapsed between today’s date and the hire date. Round off the no. of days.
+
+Query:
+SELECT LAST_NAME,ROUND(SYSDATE-HIRE_DATE)AS DAYS FROM EMPLOYEE_DETAILS;
+
+18.	Find the no. of weeks elapsed between today’s date and the hire date of all employees.
+
+Query:
+SELECT LAST_NAME,(SYSDATE-HIRE_DATE)/7 AS WEEKS FROM EMPLOYEE_DETAILS;
+
+
+19.	Find the no. of years elapsed between today’s date and the hire date. Round off the no. of years.
+
+Query:
+SELECT LAST_NAME,ROUND(MONTHS_BETWEEN(SYSDATE,HIRE_DATE)/12)AS YEARS FROM EMPLOYEE_DETAILS;
+
+20.	Display the employee name and the number of months between today’s date and employee’s hire date. Label the column MONTHS_WORKED.
+
+Query:
+SELECT CONCAT(CONCAT(FIRST_NAME,' '),LAST_NAME)AS NAME,MONTHS_BETWEEN(SYSDATE,HIRE_DATE)AS MONTHS_WORKED FROM EMPLOYEE_DETAILS;
+
+21.	Display the employee name and the last day of the months in which the employees were hired.
+
+Query:
+SELECT FIRST_NAME, LAST_DAY(HIRE_DATE) AS LAST_DAY FROM EMPLOYEE_DETAILS;
+
+22.	Display each employee’s name and the year in which the employees were hired in words.
+
+Query:
+SELECT FIRST_NAME,TO_CHAR(HIRE_DATE,'YEAR')AS YEAR_IN_WORDS FROM EMPLOYEE_DETAILS;
+
+23.	Display the date 5 months later to today’s date. Rename the column as FUTURE DATE.
+
+Query:
+SELECT ADD_MONTHS(SYSDATE,5)AS "FUTURE DATE" FROM DUAL;
+
+24.	Display name (format: first_name (space) last_name), the day and date of joining of all employees.
+
+Query:
+SELECT CONCAT(CONCAT(FIRST_NAME, ' '),LAST_NAME)AS NAME, TO_CHAR(HIRE_DATE, 'DAY') AS DAY, TO_CHAR(HIRE_DATE, 'DD-MON-YYYY') AS JOINING_DATE FROM EMPLOYEE_DETAILS;
+
+25.	Display the annual salary of all employees where annual Salary :=( salary *12)+comm_pct. In another column display the rounded off annual salary up to 2 places 	after decimal point.
+
+Query:
+SELECT FIRST_NAME,(SALARY*12)+NVL(COMMISSION_PCT, 0)AS ANNUAL_SALARY, ROUND((SALARY*12)+NVL(COMMISSION_PCT,0),2)AS ROUNDED_SALARY FROM EMPLOYEE_DETAILS;
+
+ 
+  

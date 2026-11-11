@@ -1,0 +1,215 @@
+1.	Create a table EMP with following structure.
+
+E_ID	FNAME		LNAME		HIRE_DATE	JOB_ID		SAL		DEPT_ID
+PK	NOT NULL	NOT NULL	NOT NULL	NOT NULL	NOT NULL	Should be greater than or equal to 10
+
+
+EMP_ID	FIRST_NAME	LAST_NAME	HIRE_DATE	JOB_ID	  	SAL	DEPT_ID
+198	Donald 		Connell		21-Jun-99	SH_CLERK	2600	50
+199	Douglas		Grant		13-Jan-98	SH_CLERK	3000	50
+200	Jennifer	Whalen		17-Sep-87	AD_ASST		4400	10
+201	Michael		Hartstein	19-Jan-99	IT_PROG		6000	20
+202	Pat		Fay		25-Oct-89	AC_MGR		6500	20
+203	Susan		Mavris		26-Nov-76	AD_VP		7500	40
+204	Hermann		Baer		23-Aug-95	AD_PRES		9500	90
+205	Shelley		Higgins		24-Feb-98	AC_MGR		2300	60
+206	William		Gitz		12-Mar-01	IT_PROG		5000	60
+100	Steven		King		15-Jun-02	AD_ASST		8956	100
+101	Neena		Kochar		10-Jul-03	SH_CLERK	3400	30
+
+Query:
+CREATE TABLE EMP
+(
+    E_ID NUMBER PRIMARY KEY,
+    FNAME VARCHAR2(20) NOT NULL,
+    LNAME VARCHAR2(20) NOT NULL,
+    HIRE_DATE DATE NOT NULL,
+    JOB_ID VARCHAR2(20) NOT NULL,
+    SAL NUMBER NOT NULL,
+    DEPT_ID NUMBER CHECK(DEPT_ID>=10)
+);
+
+2. Display the fname of all employees in ascending order. Give appropriate alias name to the column.
+
+Query:
+SELECT FNAME AS "EMPLOYEE NAME" FROM EMP ORDER BY FNAME ASC;
+
+3. Display the fname of all employees in descending order. Give appropriate alias name to the column.
+
+Query:
+SELECT FNAME AS "EMPLOYEE NAME" FROM EMP ORDER BY FNAME DESC;
+
+
+4. Display the hire date of all employees in ascending order.
+
+Query:
+SELECT HIRE_DATE FROM EMP ORDER BY HIRE_DATE ASC;
+
+5. Display the employee details whose fname starts with either J or M. Sort the result by employee lname.
+
+Query:
+
+SELECT *FROM EMP WHERE FNAME LIKE 'J%' OR FNAME LIKE 'M%' ORDER BY LNAME ASC;
+
+
+6. Find the highest, lowest, average and sum of salary of all employees. Give alias names to all the columns as ‘Max’, ‘Min’, ‘Avg’, ‘Sum’ respectively.
+
+Query:
+SELECT JOB_ID,
+       MAX(SAL) AS "MAX",
+       MIN(SAL) AS "MIN",
+       AVG(SAL) AS "AVG",
+       SUM(SAL) AS "SUM"
+FROM EMP;
+
+
+7. Find the highest, lowest, average and sum of salary of all employees of each individual job type.
+
+Query:
+SELECT JOB_ID,
+       MAX(SAL) AS "MAX",
+       MIN(SAL) AS "MIN",
+       AVG(SAL) AS "AVG",
+       SUM(SAL) AS "SUM"
+FROM EMP GROUP BY JOB_ID;
+
+
+8. Display the number of people under each job.
+
+Query:
+SELECT JOB_ID, COUNT(*) AS "NUMBER OF EMPLOYEES" FROM EMP GROUP BY JOB_ID;
+
+9. Display the number of managers in the company without listing their emp_id or names.
+
+10. Find the difference between the highest and the lowest salaries.
+
+Query:
+SELECT MAX(SAL)-MIN(SAL) AS "SALARY DIFFERENCE" FROM EMP;
+
+11. Display the maximum and average salary of the engineers.
+
+Query:
+SELECT MAX(SAL) AS "MAX SALARY",
+       AVG(SAL) AS "AVG SALARY"
+FROM EMP WHERE JOB_ID='IT_PROG';
+
+12. Display the employee fname that is first and the employee fname that is last in the alphabetized list of all employees.
+
+Query:
+SELECT MIN(FNAME) AS "FIRST EMPLOYEE",
+       MAX(FNAME) AS "LAST EMPLOYEE"
+FROM EMP;
+
+13. Display the date when the first employee was hired and last date of hiring the employees. Rename the column as ‘First Hire_Date’ and ‘Last Hire_Date’.
+
+Query;
+SELECT MIN(HIRE_DATE) AS "First Hire_Date",
+       MAX(HIRE_DATE) AS "Last Hire_Date"
+FROM EMP;
+
+
+14. Display the maximum and average salary of the clerks.
+
+Query:
+SELECT MAX(SAL) AS "MAX SALARY",
+       AVG(SAL) AS "AVG SALARY"
+FROM EMP WHERE JOB_ID='SH_CLERK';
+
+15. Display the dept no. and the salary of the lowest paid employee for each department. Give an alias name to the minimum salary column.
+
+Query:
+SELECT DEPT_ID,
+       MIN(SAL) AS "MINIMUM SALARY" FROM EMP GROUP BY DEPT_ID;
+
+16. Display the dept no. and the salary of the lowest paid employee for each department. Exclude any groups where the minimum salary is 3000 or less. Sort the output in descending order of salary.
+
+Query:
+SELECT DEPT_ID,
+       MIN(SAL) AS "MINIMUM SALARY" FROM EMP GROUP BY DEPT_ID HAVING MIN(SAL) > 3000 ORDER BY MIN(SAL) DESC;
+
+
+17. Display the following for all rows of the table:
+<First_name > whose designation is <job_id> gets <Salary> but wants to earn <3*Salary>.
+
+Query:
+SELECT FNAME || ' whose designation is ' ||
+       JOB_ID || ' gets ' || SAL || ' but wants to earn ' || (3*SAL) AS "EMPLOYEE DETAILS" FROM EMP;
+
+18. Display the details of all employees in the following format:
+198, Donald, Connell, 21-Jun-99, SH_CLERK, 2600, 50.
+
+Query:
+SELECT E_ID || ', ' || FNAME || ', ' || LNAME || ', ' || TO_CHAR(HIRE_DATE, 'DD-Mon-YY') || ', ' || JOB_ID || ', ' || SAL || ', ' || DEPT_ID AS 
+"EMPLOYEE DETAILS" FROM EMP;
+
+19. Display today’s date. Rename the column as TODAY.
+
+Query:
+SELECT SYSDATE AS "TODAY" FROM DUAL;
+
+20. Display the Employee id, the day and the year in which the employees were hired.
+
+Query:
+SELECT E_ID, TO_CHAR(HIRE_DATE, 'DD')AS "DAY", TO_CHAR(HIRE_DATE, 'YYYY') AS "YEAR" FROM EMP;
+
+21. Display the employee name and the hire date of all employees in the format ‘dd-month-yy’.
+
+Query:
+SELECT FNAME,TO_CHAR(HIRE_DATE, 'DD-MONTH-YY') AS "HIRE DATE" FROM EMP;
+
+22. Display the employee_id, months in which the employees were hired.
+
+Query:
+SELECT E_ID,TO_CHAR(HIRE_DATE, 'MONTH') AS "HIRE MONTH" FROM EMP;
+
+23. Display the employee name, Employee id and the hire date of all employees in the format ‘dd-mon-yyyy’.
+
+Query:
+SELECT FNAME,E_ID,TO_CHAR(HIRE_DATE, 'DD-MON-YYYY') AS "HIRE DATE" FROM EMP;
+
+24. Display the employee name, Employee id and the hire date of all employees in the format ‘month-dd-yyyy’.
+
+Query:
+SELECT FNAME,E_ID,TO_CHAR(HIRE_DATE, 'MONTH-DD-YYYY') AS "HIRE DATE" FROM EMP;
+
+25. Display the system year in full spelling.(Ex: Nineteen Ninety Nine for 1999).
+
+Query:
+SELECT TO_CHAR(SYSDATE, 'YEAR') AS "YEAR IN WORDS" FROM DUAL;
+
+26.	Find date, 15 days after today’s date, 15 days before today’s date.
+
+Query:
+SELECT SYSDATE AS "TODAY",
+       SYSDATE + 15 AS "AFTER 15 DAYS", 
+       SYSDATE - 15 AS "BEFORE 15 DAYS" FROM  DUAL;
+
+27.	Ensure the domain constraint and entity integrity constraint from the above table.
+
+Query:
+INSERT INTO EMP VALUES(300, 'Rahul', 'Roy', DATE '2020-01-01', 'IT_PROG', 5000, 5);
+INSERT INTO EMP VALUES(NULL, 'Rahul', 'Roy', DATE '2020-01-01', 'IT_PROG', 5000, 20);
+INSERT INTO EMP VALUES(198, 'Rahul', 'Roy', DATE '2020-01-01', 'IT_PROG', 5000, 5);
+
+28.	Drop the domain constraint from the table. 
+
+Query:
+DEPT_ID CHECK(DEPT_ID>=10)
+SELECT CONSTRAINT_NAME, SEARCH_CONDITION FROM USER_CONSTRAINTS WHERE TABLE_NAME='EMP' AND CONSTRAINT_TYPE='C';
+ALTER TABLE EMP
+DROP CONSTRAINT SYS_C001234;
+
+29.	Drop the primary key from the table.
+
+Query:
+ALTER TABLE EMP 
+DROP PRIMARY KEY;
+
+30.	Drop the created table.
+
+Query:
+DROP TABLE EMP;
+
+
+
+
