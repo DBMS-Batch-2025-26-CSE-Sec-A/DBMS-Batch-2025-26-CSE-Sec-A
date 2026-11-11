@@ -1,0 +1,1 @@
+SELECT MIN(HIRE_DATE) AS "First Hire_Date", MAX(HIRE_DATE) AS "Last Hire_Date" FROM EMP;
