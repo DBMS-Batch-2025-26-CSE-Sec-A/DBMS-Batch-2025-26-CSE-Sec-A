@@ -1,0 +1,1 @@
+SELECT TRIM('e' FROM FIRST_NAME) AS "Trimmed" FROM Employee_Details WHERE INSTR(FIRST_NAME, 'e') > 0;
