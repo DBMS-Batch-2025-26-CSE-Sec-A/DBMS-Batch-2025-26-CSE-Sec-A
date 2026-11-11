@@ -1,1 +1,0 @@
-SELECT (Sell_price - Cost_price) AS Profit FROM Products_Master;
