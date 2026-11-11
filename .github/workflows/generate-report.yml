@@ -1,0 +1,44 @@
+name: Generate Lab Attendance Report (Manual)
+
+on:
+  workflow_dispatch: # Adds the manual "Run workflow" button in the GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  build-report:
+    runs-on: ubuntu-latest
+    # Optional extra lock: Replace 'AG349' with your exact GitHub username (or add more if needed)
+    # Remove this `if:` line if you want ANY repo admin/maintainer with write access to click the button
+    if: github.actor == 'AG349'
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install openpyxl
+        run: pip install openpyxl
+
+      - name: Generate Excel Report
+        run: python generate_report.py
+
+      - name: Commit and Push Excel Report to main
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add Lab_Submission_Report.xlsx
+          if git diff --staged --quiet; then
+            echo "No changes in attendance report."
+          else
+            git commit -m "chore: update Lab_Submission_Report.xlsx ($(date +'%Y-%m-%d'))"
+            git push origin main
+          fi
