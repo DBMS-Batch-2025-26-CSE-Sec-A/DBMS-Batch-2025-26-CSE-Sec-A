@@ -1,0 +1,1 @@
+SELECT m.Mv_no, m.Title FROM Movie m, Invoice i, Customer c WHERE m.Mv_no = i.Mv_no AND i.Cust_id = c.Cust_id AND c.Fname = 'Ivan';
