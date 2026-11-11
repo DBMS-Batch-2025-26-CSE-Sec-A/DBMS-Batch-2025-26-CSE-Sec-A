@@ -1,0 +1,168 @@
+1.	Create the following tables with the following data :
+
+Sports_Stud                                        			Cultural_Stud                  
+
+ROLL	NAME		DEPT	SPORTS_FEE				ROLL	NAME	DEPT	CUL_FEES
+1	Aman		IT	1200					1	Aman	IT	700
+7	Anurag		CS	1500					2	Binay	IT	700
+2	Binay		IT	1000					3	Bipul	CS	600
+8	Chiranjit	CS	1700					4	Joy	CS	600
+									5	Surojit	IT	700
+								6	Wasim	CS	600			
+
+CONSTRAINTS:-
+A)	Roll of both the tables is the primary key of corresponding tables.
+B)	Dept should be either IT or CS.
+C)	Sports_ fee should be greater or equal to 1000.
+D)	Cultural_Stud should be greater than equal to 600.
+E)	Name should be the unique key of the two relations.
+
+Query:
+CREATE TABLE SPORTS_STUD
+(
+    ROLL NUMBER(5) PRIMARY KEY,
+    NAME VARCHAR2(20) UNIQUE,
+    DEPT VARCHAR2(10) CHECK (DEPT IN ('IT','CS')),
+    SPORTS_FEE NUMBER(6) CHECK(SPORTS_FEE>=1000)
+);
+
+CREATE TABLE CULTURAL_STUD
+(
+    ROLL NUMBER(5) PRIMARY KEY,
+    NAME VARCHAR2(20) UNIQUE,
+    DEPT VARCHAR2(10) CHECK (DEPT IN('IT','CS')),
+    CUL_FEES NUMBER(6) CHECK (CUL_FEES>=600)
+);
+
+INSERT INTO SPORTS_STUD VALUES(1,'Aman','IT',1200);
+INSERT INTO SPORTS_STUD VALUES(7,'Anurag','CS',1500);
+INSERT INTO SPORTS_STUD VALUES(2,'Binay','IT',1000);
+INSERT INTO SPORTS_STUD VALUES(8,'Chiranjit','CS',1700);
+COMMIT;
+
+INSERT INTO CULTURAL_STUD VALUES(1,'Aman','IT',700);
+INSERT INTO CULTURAL_STUD VALUES(2,'Binay','IT',700);
+INSERT INTO CULTURAL_STUD VALUES(3,'Bipul','CS',600);
+INSERT INTO CULTURAL_STUD VALUES(4,'Joy','CS',600);
+INSERT INTO CULTURAL_STUD VALUES(5,'Surojit','IT',700);
+INSERT INTO CULTURAL_STUD VALUES(6,'Wasim','CS',600);
+COMMIT;
+
+
+2. Display all the distinct students studying in the organization including both the departments.
+
+Query:
+SELECT NAME FROM SPORTS_STUD UNION
+SELECT NAME FROM CULTURAL_STUD;
+
+3. Display all the students studying in the organization including both the departments.
+
+Query:
+SELECT NAME FROM SPORTS_STUD 
+UNION ALL
+SELECT NAME FROM CULTURAL_STUD;
+
+
+4. Display those students working in both cultural and sports group.
+
+Query:
+SELECT NAME FROM SPORTS_STUD INTERSECT
+SELECT NAME FROM CULTURAL_STUD;
+
+5. Display those students working in only sports group.
+
+Query:
+SELECT NAME FROM SPORTS_STUD MINUS
+SELECT NAME FROM CULTURAL_STUD;
+
+6. Display those students working in only cultural group.
+
+Query:
+SELECT NAME FROM CULTURAL_STUD MINUS 
+SELECT NAME FROM SPORTS_STUD;
+
+7. Display the roll and both the sports fee and cultural fee of the students working in both cultural and sports group.
+
+Query:
+SELECT S.ROLL,S.SPORTS_FEE,C.CUL_FEES FROM SPORTS_STUD S JOIN CULTURAL_STUD C ON S.ROLL=C.ROLL;
+
+8. Add a new field birthday to both the tables for all students. Add data according to your own wish.
+
+Query:
+ALTER TABLE SPORTS_STUD ADD BIRTHDAY DATE;
+ALTER TABLE CULTURAL_STUD ADD BIRTHDAY DATE;
+UPDATE SPORTS_STUD SET BIRTHDAY=TO_DATE('15-05-2005','DD-MM-YYYY') WHERE ROLL=1;
+UPDATE SPORTS_STUD SET BIRTHDAY=TO_DATE('20-08-2004','DD-MM-YYYY') WHERE ROLL=7;
+UPDATE SPORTS_STUD SET BIRTHDAY=TO_DATE('10-01-2005','DD-MM-YYYY') WHERE ROLL=2;
+UPDATE SPORTS_STUD SET BIRTHDAY=TO_DATE('25-12-2004','DD-MM-YYYY') WHERE ROLL=8;
+
+UPDATE CULTURAL_STUD SET BIRTHDAY=TO_DATE('15-05-2005','DD-MM-YYYY') WHERE ROLL=1;
+UPDATE CULTURAL_STUD SET BIRTHDAY=TO_DATE('10-01-2005','DD-MM-YYYY') WHERE ROLL=2;
+UPDATE CULTURAL_STUD SET BIRTHDAY=TO_DATE('05-03-2005','DD-MM-YYYY') WHERE ROLL=3;
+UPDATE CULTURAL_STUD SET BIRTHDAY=TO_DATE('18-07-2004','DD-MM-YYYY') WHERE ROLL=4;
+UPDATE CULTURAL_STUD SET BIRTHDAY=TO_DATE('09-09-2005','DD-MM-YYYY') WHERE ROLL=5;
+UPDATE CULTURAL_STUD SET BIRTHDAY=TO_DATE('22-11-2004','DD-MM-YYYY') WHERE ROLL=6;
+COMMIT;
+
+
+9. Display the student name, age and month of birth of all the distinct students of the organization.
+
+Query:
+SELECT NAME,TRUNC(MONTHS_BETWEEN(SYSDATE,BIRTHDAY)/12)AS AGE, TO_CHAR(BIRTHDAY, 'MONTH')AS MONTH_OF_BIRTH FROM SPORTS_STUD UNION 
+SELECT NAME,TRUNC(MONTHS_BETWEEN(SYSDATE,BIRTHDAY)/12), TO_CHAR(BIRTHDAY, 'MONTH') FROM CULTURAL_STUD;
+
+10. Display the last day of the month in which all the students were born. (Use set operators to display the result for all students).
+
+Query:
+SELECT LAST_DAY(BIRTHDAY)AS LAST_DAY FROM SPORTS_STUD UNION
+SELECT LAST_DAY(BIRTHDAY) FROM CULTURAL_STUD;
+
+11. Display the details of students from sports_stud table in the following format:
+<Name> who studies in <Dept> dept pays Rs<sports_fee> for sports.
+
+Query:
+SELECT NAME || ' who studies in ' || DEPT || ' dept pays Rs' || SPORTS_FEE || ' for sports.' AS DETAILS FROM SPORTS_STUD;
+
+12. Display the details of all students from IT department. Display the total money earned by the organization from the sports department as well as from the cultural        department.
+
+Query:
+SELECT ROLL,NAME,DEPT,SPORTS_FEE AS FEE FROM SPORTS_STUD WHERE DEPT='IT' UNION ALL 
+SELECT ROLL,NAME,DEPT,CUL_FEES FROM CULTURAL_STUD WHERE DEPT='IT';
+
+SELECT SUM(SPORTS_FEE)AS TOTAL_SPORTS_FEE FROM SPORTS_STUD;
+
+SELECT SUM(CUL_FEES)AS TOTAL_CULTURAL_FEE FROM CULTURAL_STUD;
+
+13. Display the name of all the students in descending order.
+
+Query:
+SELECT NAME 
+FROM
+(
+    SELECT NAME FROM SPORTS_STUD 
+    UNION
+    SELECT NAME FROM CULTURAL_STUD
+)
+ORDER BY NAME DESC;
+
+14. Drop all the domain constraints from both the tables.
+
+Query:
+
+SELECT CONSTRAINT_NAME,TABLE_NAME FROM USER_CONSTRAINTS WHERE TABLE_NAME IN('SPORTS_STUD','CULTURAL_STUD')AND CONSTRAINT_TYPE='C';
+
+ALTER TABLE SPORTS_STUD 
+DROP CONSTRAINT SYS_C008664;
+
+ALTER TABLE CULTURAL_STUD
+DROP CONSTRAINT SYS_C008668;
+
+15. Display the maximum, minimum and average sports_fee taken by the organization.
+
+Query:
+
+SELECT MAX(SPORTS_FEE) AS MAXIMUM,
+       MIN(SPORTS_FEE) AS MINIMUM,
+       AVG(SPORTS_FEE) AS AVERAGE
+FROM SPORTS_STUD; 
+
