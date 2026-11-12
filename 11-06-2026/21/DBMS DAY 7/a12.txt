@@ -1,0 +1,1 @@
+SELECT LAST_NAME FROM Employee_Details WHERE SUBSTR(JOB_ID, 4) = 'REP';
