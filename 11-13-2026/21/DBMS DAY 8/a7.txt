@@ -1,0 +1,1 @@
+SELECT s.ROLL, s.SPORTS_FEE, c.CUL_FEES FROM Sports_Stud s, Cultural_Stud c WHERE s.ROLL = c.ROLL;
