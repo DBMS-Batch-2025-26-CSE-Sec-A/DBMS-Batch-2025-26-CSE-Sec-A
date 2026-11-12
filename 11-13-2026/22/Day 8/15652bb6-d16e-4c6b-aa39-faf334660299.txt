@@ -1,0 +1,241 @@
+Create Database day_8;
+Use day_8;
+
+#Q1-A
+CREATE TABLE Sports_Stud (
+    ROLL INT PRIMARY KEY,
+    NAME VARCHAR(30) UNIQUE,
+    DEPT VARCHAR(10),
+    SPORTS_FEE INT,
+
+    CONSTRAINT chk_sports_dept
+    CHECK (DEPT IN ('IT', 'CS')),
+
+    CONSTRAINT chk_sports_fee
+    CHECK (SPORTS_FEE >= 1000)
+);
+
+#Q1-B
+INSERT INTO Sports_Stud
+VALUES
+(1, 'Aman', 'IT', 1200),
+(2, 'Binay', 'IT', 1000),
+(7, 'Anurag', 'CS', 1500),
+(8, 'Chiranjit', 'CS', 1700);
+
+#Q1-C
+CREATE TABLE Cultural_Stud (
+    ROLL INT PRIMARY KEY,
+    NAME VARCHAR(30) UNIQUE,
+    DEPT VARCHAR(10),
+    CUL_FEES INT,
+
+    CONSTRAINT chk_cultural_dept
+    CHECK (DEPT IN ('IT', 'CS')),
+
+    CONSTRAINT chk_cultural_fee
+    CHECK (CUL_FEES >= 600)
+);
+
+#Q1-D
+INSERT INTO Cultural_Stud
+VALUES
+(1, 'Aman', 'IT', 700),
+(2, 'Binay', 'IT', 700),
+(3, 'Bipul', 'CS', 600),
+(4, 'Joy', 'CS', 600),
+(5, 'Surojit', 'IT', 700),
+(6, 'Wasim', 'CS', 600);
+
+SELECT * FROM Sports_Stud;
+
+SELECT * FROM Cultural_Stud;
+
+#Q2
+SELECT ROLL, NAME, DEPT
+FROM Sports_Stud
+
+UNION
+
+SELECT ROLL, NAME, DEPT
+FROM Cultural_Stud;
+
+#Q3
+SELECT ROLL, NAME, DEPT
+FROM Sports_Stud
+
+UNION ALL
+
+SELECT ROLL, NAME, DEPT
+FROM Cultural_Stud;
+
+#Q4
+SELECT ROLL, NAME, DEPT
+FROM Sports_Stud
+
+INTERSECT
+
+SELECT ROLL, NAME, DEPT
+FROM Cultural_Stud;
+
+#Q5
+SELECT ROLL, NAME, DEPT
+FROM Sports_Stud
+
+EXCEPT
+
+SELECT ROLL, NAME, DEPT
+FROM Cultural_Stud;
+
+#Q6
+SELECT ROLL, NAME, DEPT
+FROM Cultural_Stud
+
+EXCEPT
+
+SELECT ROLL, NAME, DEPT
+FROM Sports_Stud;
+
+#Q7
+SELECT
+    S.ROLL,
+    S.SPORTS_FEE,
+    C.CUL_FEES
+FROM Sports_Stud S
+INNER JOIN Cultural_Stud C
+ON S.ROLL = C.ROLL;
+
+#Q8-A
+ALTER TABLE Sports_Stud
+ADD BIRTHDAY DATE;
+
+ALTER TABLE Cultural_Stud
+ADD BIRTHDAY DATE;
+
+#Q8-B
+UPDATE Sports_Stud
+SET BIRTHDAY = '2005-05-12'
+WHERE ROLL = 1;
+
+UPDATE Sports_Stud
+SET BIRTHDAY = '2004-08-20'
+WHERE ROLL = 2;
+
+UPDATE Sports_Stud
+SET BIRTHDAY = '2005-03-15'
+WHERE ROLL = 7;
+
+UPDATE Sports_Stud
+SET BIRTHDAY = '2004-11-25'
+WHERE ROLL = 8;
+
+#Q8-C
+UPDATE Cultural_Stud
+SET BIRTHDAY = '2005-05-12'
+WHERE ROLL = 1;
+
+UPDATE Cultural_Stud
+SET BIRTHDAY = '2004-08-20'
+WHERE ROLL = 2;
+
+UPDATE Cultural_Stud
+SET BIRTHDAY = '2005-01-10'
+WHERE ROLL = 3;
+
+UPDATE Cultural_Stud
+SET BIRTHDAY = '2004-06-18'
+WHERE ROLL = 4;
+
+UPDATE Cultural_Stud
+SET BIRTHDAY = '2005-09-22'
+WHERE ROLL = 5;
+
+UPDATE Cultural_Stud
+SET BIRTHDAY = '2004-12-05'
+WHERE ROLL = 6;
+
+#Q9
+SELECT
+    NAME,
+    TIMESTAMPDIFF(YEAR, BIRTHDAY, CURDATE()) AS AGE,
+    MONTHNAME(BIRTHDAY) AS BIRTH_MONTH
+FROM
+(
+    SELECT ROLL, NAME, BIRTHDAY
+    FROM Sports_Stud
+
+    UNION
+
+    SELECT ROLL, NAME, BIRTHDAY
+    FROM Cultural_Stud
+) AS STUDENTS;
+
+#Q10
+SELECT LAST_DAY(BIRTHDAY) AS LAST_DAY_OF_MONTH
+FROM Sports_Stud
+
+UNION
+
+SELECT LAST_DAY(BIRTHDAY) AS LAST_DAY_OF_MONTH
+FROM Cultural_Stud;
+
+#Q11
+SELECT CONCAT(
+    NAME,
+    ' who studies in ',
+    DEPT,
+    ' dept pays Rs.',
+    SPORTS_FEE,
+    ' for sports.'
+) AS STUDENT_DETAILS
+FROM Sports_Stud;
+
+#Q12-A
+SELECT *
+FROM Sports_Stud
+WHERE DEPT = 'IT';
+
+#Q12-B
+SELECT *
+FROM Cultural_Stud
+WHERE DEPT = 'IT';
+
+#Q12-C
+SELECT SUM(SPORTS_FEE) AS TOTAL_SPORTS_INCOME
+FROM Sports_Stud;
+
+#Q12-D
+SELECT SUM(CUL_FEES) AS TOTAL_CULTURAL_INCOME
+FROM Cultural_Stud;
+
+#Q13
+SELECT NAME
+FROM Sports_Stud
+
+UNION
+
+SELECT NAME
+FROM Cultural_Stud
+
+ORDER BY NAME DESC;
+
+#Q14-A
+ALTER TABLE Sports_Stud
+DROP CHECK chk_sports_dept;
+
+ALTER TABLE Sports_Stud
+DROP CHECK chk_sports_fee;
+
+#Q14-B
+ALTER TABLE Cultural_Stud
+DROP CHECK chk_cultural_dept;
+
+ALTER TABLE Cultural_Stud
+DROP CHECK chk_cultural_fee;
+
+#Q15
+SELECT
+    MAX(SPORTS_FEE) AS MAXIMUM_FEE,
+    MIN(SPORTS_FEE) AS MINIMUM_FEE,
+    AVG(SPORTS_FEE) AS AVERAGE_FEE
+FROM Sports_Stud;
