@@ -1,0 +1,1 @@
+SELECT TO_CHAR(SALARY, '$99,999.00') AS "SALARY" FROM Employee_Details;
