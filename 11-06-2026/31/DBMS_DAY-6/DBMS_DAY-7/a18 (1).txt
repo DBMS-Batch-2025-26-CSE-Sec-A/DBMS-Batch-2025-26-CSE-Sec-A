@@ -1,0 +1,1 @@
+SELECT (SYSDATE - HIRE_DATE) / 7 AS "WEEKS_ELAPSED" FROM Employee_Details;
