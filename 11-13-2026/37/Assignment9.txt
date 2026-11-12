@@ -1,0 +1,195 @@
+1.	Create the following tables:
+                Customer                                                                       Movie
+Cust_id	Fname		Lname		Area		Phone			Mv_no	Title			Type		Star		Price
+PK	Not Null			Not Null				PK	Not Null		Not Null	Not Null	Not NULL
+Null
+A01	Ivan		Bayross		SA		6125467			1	Bloody			Action		JC		181
+A02	Vandana		Saiteal		MU		5560379			2	The Firm		Thriller	TC		200
+A03	Pramada		Jauguste	DA		4560389			3	Pretty Woman		Romance		RG		151
+A04	Basu		Navindi		BA		6125401			4	Home Alone		Comedy		MC		150
+A05	Ravi		Shreedhar	NA	      	 __			5	The Fugitive		Thriller	MF		200
+A06	Rukmini	       	____		GH		5125274			6	Coma			Suspense	MD		100
+										7	Dracula			Horror		GO		150
+										8	Quick Change		Comedy		BM		100
+										9	Gone with the Wind 	Action		CB		200
+										10	Carry on Doctor		Comedy		LP		100
+
+Inv_no	Mv_no	Cust_id	Issue_date	Return_date
+PK	FK	FK 	Not Null	Not Null
+I01	4	A01	23-jul-93	25-jul-93
+I02	3	A02	12-aug-93	15-aug-93
+I03	1	A02	15-aug-93	18-aug-93
+I04	6	A03	10-sep-93	13-sep-93
+I05	7	A04	05-aug-93	08-aug-93
+I06	2	A06	18-sep-93	21-sep-93
+I07	9	A05	07-jul-93	10-jul-93
+I08	9	A01	11-aug-93	14-aug-93
+I09	5	A03	06-jul-93	09-jul-93
+I10	8	A06	03-sep-93	06-sep-93
+
+Query:
+
+CREATE TABLE CUSTOMER
+(
+    CUST_ID VARCHAR2(3) PRIMARY KEY,
+    FNAME VARCHAR2(20) NOT NULL,
+    LNAME VARCHAR2(20),
+    AREA VARCHAR2(3) NOT NULL,
+    PHONE NUMBER(10),
+    CONSTRAINT CUST_ID_CHECK CHECK (CUST_ID LIKE 'A%')
+);
+
+INSERT INTO CUSTOMER VALUES ('A01','Ivan','Bayross','SA',6125467);
+INSERT INTO CUSTOMER VALUES ('A02','Vandana','Saiteal','MU',5560379);
+INSERT INTO CUSTOMER VALUES ('A03','Pramada','Jauguste','DA',4560389);
+INSERT INTO CUSTOMER VALUES ('A04','Basu','Navindi','BA',6125401);
+INSERT INTO CUSTOMER VALUES ('A05','Ravi','Shreedhar','NA',NULL);
+INSERT INTO CUSTOMER VALUES ('A06','Rukmini',NULL,'GH',5125274);
+
+COMMIT;
+
+CREATE TABLE MOVIE
+(
+    MV_NO NUMBER(3) PRIMARY KEY,
+    TITLE VARCHAR2(30) NOT NULL,
+    TYPE VARCHAR2(15) NOT NULL,
+    STAR VARCHAR2(10) NOT NULL,
+    PRICE NUMBER(6) NOT NULL
+);
+
+INSERT INTO MOVIE VALUES (1,'Bloody','Action','JC',181);
+INSERT INTO MOVIE VALUES (2,'The Firm','Thriller','TC',200);
+INSERT INTO MOVIE VALUES (3,'Pretty Woman','Romance','RG',151);
+INSERT INTO MOVIE VALUES (4,'Home Alone','Comedy','MC',150);
+INSERT INTO MOVIE VALUES (5,'The Fugitive','Thriller','MF',200);
+INSERT INTO MOVIE VALUES (6,'Coma','Suspense','MD',100);
+INSERT INTO MOVIE VALUES (7,'Dracula','Horror','GO',150);
+INSERT INTO MOVIE VALUES (8,'Quick Change','Comedy','BM',100);
+INSERT INTO MOVIE VALUES (9,'Gone with the Wind','Action','CB',200);
+INSERT INTO MOVIE VALUES (10,'Carry on Doctor','Comedy','LP',100);
+
+COMMIT;
+
+CREATE TABLE INVOICE
+(
+    INV_NO VARCHAR2(3) PRIMARY KEY,
+    MV_NO NUMBER(3),
+    CUST_ID VARCHAR2(3),
+    ISSUE_DATE DATE NOT NULL,
+    RETURN_DATE DATE NOT NULL,
+
+    CONSTRAINT INV_MV_FK FOREIGN KEY (MV_NO)
+    REFERENCES MOVIE(MV_NO),
+
+    CONSTRAINT INV_CUST_FK FOREIGN KEY (CUST_ID)
+    REFERENCES CUSTOMER(CUST_ID),
+
+    CONSTRAINT INV_NO_CHECK CHECK (INV_NO LIKE 'I%')
+);
+
+
+INSERT INTO INVOICE VALUES ('I01',4,'A01',TO_DATE('23-JUL-93','DD-MON-RR'),TO_DATE('25-JUL-93','DD-MON-RR'));
+
+INSERT INTO INVOICE VALUES ('I02',3,'A02',TO_DATE('12-AUG-93','DD-MON-RR'),TO_DATE('15-AUG-93','DD-MON-RR'));
+
+INSERT INTO INVOICE VALUES ('I03',1,'A02',TO_DATE('15-AUG-93','DD-MON-RR'),TO_DATE('18-AUG-93','DD-MON-RR'));
+
+INSERT INTO INVOICE VALUES ('I04',6,'A03',TO_DATE('10-SEP-93','DD-MON-RR'),TO_DATE('13-SEP-93','DD-MON-RR'));
+
+INSERT INTO INVOICE VALUES ('I05',7,'A04',TO_DATE('05-AUG-93','DD-MON-RR'),TO_DATE('08-AUG-93','DD-MON-RR'));
+
+INSERT INTO INVOICE VALUES ('I06',2,'A06',TO_DATE('18-SEP-93','DD-MON-RR'),TO_DATE('21-SEP-93','DD-MON-RR'));
+
+INSERT INTO INVOICE VALUES ('I07',9,'A05',TO_DATE('07-JUL-93','DD-MON-RR'),TO_DATE('10-JUL-93','DD-MON-RR'));
+
+INSERT INTO INVOICE VALUES ('I08',9,'A01',TO_DATE('11-AUG-93','DD-MON-RR'),TO_DATE('14-AUG-93','DD-MON-RR'));
+
+INSERT INTO INVOICE VALUES ('I09',5,'A03',TO_DATE('06-JUL-93','DD-MON-RR'),TO_DATE('09-JUL-93','DD-MON-RR'));
+
+INSERT INTO INVOICE VALUES ('I10',8,'A06',TO_DATE('03-SEP-93','DD-MON-RR'),TO_DATE('06-SEP-93','DD-MON-RR'));
+
+COMMIT;
+
+
+2.	Display the customer names and movie number of all customers who have been issued a movie.
+
+Query:
+SELECT C.FNAME,C.LNAME,I.MV_NO FROM CUSTOMER C,INVOICE I WHERE C.CUST_ID=I.CUST_ID;
+
+3.	Display the movie number and title that has been issued to Ivan.
+
+Query:
+SELECT M.MV_NO,M.TITLE FROM MOVIE M,INVOICE I,CUSTOMER C WHERE M.MV_NO=I.MV_NO AND I.CUST_ID=C.CUST_ID AND C.FNAME='Ivan';
+
+4.	Display title, customer id, movie number for all movies that are issued.
+
+Query:
+SELECT M.TITLE,I.CUST_ID,I.MV_NO FROM MOVIE M,INVOICE I WHERE M.MV_NO=I.MV_NO;
+
+5.	Display the title and type of the movie that have been issued to Vandana.
+
+Query:
+SELECT M.TITLE, M.TYPE FROM MOVIE M, INVOICE I, CUSTOMER C WHERE M.MV_NO=I.MV_NO AND I.CUST_ID=C.CUST_ID AND C.FNAME='Vandana';
+
+
+6.	Find the name of all customers who have been issued the movie of type action.
+
+Query:
+SELECT DISTINCT C.FNAME, C.LNAME FROM CUSTOMER C, INVOICE I, MOVIE M WHERE C.CUST_ID = I.CUST_ID AND I.MV_NO = M.MV_NO AND M.TYPE='Action';
+
+7.	Display the movie title , last name, first name of all customers having the movie number greater than equal to 3 in the following format-
+The movie taken by {Fname} {Lname} is {Title}.
+
+Query:
+SELECT 'The movie taken by ' || C.FNAME || ' ' || C.LNAME || ' is ' || M.TITLE || '.' AS DETAILS FROM CUSTOMER C, INVOICE I, MOVIE M
+WHERE C.CUST_ID = I.CUST_ID AND I.MV_NO=M.MV_NO AND I.MV_NO>=3;
+
+8.	Display the customer who has been issued the movie having invoice no ‘I10’.S
+
+Query:
+SELECT C.FNAME, C.LNAME FROM CUSTOMER C, INVOICE I WHERE C.CUST_ID=I.CUST_ID AND I.INV_NO='I10';
+
+9.	Display the customer name, phone and area who have been issued the movie before the month of August.
+
+Query:
+SELECT C.FNAME, C.LNAME, C.PHONE,C.AREA FROM CUSTOMER C, INVOICE I WHERE C.CUST_ID=I.CUST_ID AND I.ISSUE_DATE<TO_DATE('01-AUG'-1993','DD-MON-YYYY');
+
+10.	Display the movie number and title that has been issued to Ivan, Vandana and Ravi.
+
+Query:
+SELECT M.MV_NO,M.TITLE FROM MOVIE M,INVOICE I,CUSTOMER C WHERE M.MV_NO=I.MV_NO AND I.CUST_ID=C.CUST_ID AND C.FNAME IN('Ivan','Vandana','Ravi');
+
+11.	List the movie number, movie name issued to customers.
+
+Query:
+SELECT M.MV_NO,M.TITLE FROM MOVIE M, INVOICE I WHERE M.MV_NO=I.MV_NO;
+
+12.	Find the type and movie numbers of movies issued to customer id ‘A01’ and ‘A02’.
+
+Query:
+SELECT M.TYPE,M.MV_NO 
+FROM MOVIE M,INVOICE I 
+WHERE M.MV_NO=I.MV_NO 
+AND I.CUST_ID IN('A01','A02');
+
+
+13.	Find out if the movie whose star is Tom Cruise has been issued to any customer and print the customer_id to whom it has been issued.
+
+Query:
+SELECT I.CUST_ID FROM MOVIE M, INVOICE I WHERE M.MV_NO = I.MV_NO AND M.STAR='TC';
+
+14.	Display the customer first name and last name who has been issued a movie.
+
+Query:
+SELECT DISTINCT C.FNAME, C.LNAME FROM CUSTOMER C,INVOICE I WHERE C.CUST_ID = I.CUST_ID;
+
+
+15.	Display the movie number which has never been issued to any customer.
+
+Query:
+SELECT MV_NO FROM MOVIE 
+WHERE MV_NO NOT IN
+(   SELECT MV_NO 
+    FROM INVOICE
+);
+
