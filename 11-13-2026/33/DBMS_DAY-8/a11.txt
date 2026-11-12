@@ -1,0 +1,1 @@
+SELECT NAME || ' who studies in ' || DEPT || ' dept pays Rs' || SPORTS_FEE || ' for sports.' AS "STUDENT_DETAILS" FROM Sports_Stud;
