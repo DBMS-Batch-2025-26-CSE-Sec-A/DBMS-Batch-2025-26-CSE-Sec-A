@@ -1,0 +1,1 @@
+SELECT INITCAP(JOB_ID) AS "JOB_ID" FROM Employee_Details;
